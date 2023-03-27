@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:eward_frontend/screens/userscreen/clipper_profile.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
 import 'package:eward_frontend/screens/authentication/loginscreen.dart';
+import 'package:eward_frontend/screens/userscreen/family_memb.dart';
 
 class profile_screen extends StatelessWidget {
   const profile_screen({super.key});
@@ -61,10 +62,15 @@ class profile_screen extends StatelessWidget {
                     width: 430,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Color.fromRGBO(143, 148, 251, 2),
+                      color:const  Color.fromRGBO(143, 148, 251, 2),
                     ),
                     child: ElevatedButton(
-                      onPressed: (() {}),
+                      onPressed: (() {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const  famMemberReg();
+                        }));
+                      }),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.transparent),
@@ -75,12 +81,12 @@ class profile_screen extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
                     height: 50,
                     width: 430,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Color.fromRGBO(143, 148, 251, 2),
+                      color:const  Color.fromRGBO(143, 148, 251, 2),
                     ),
                     child: ElevatedButton(
                       onPressed: (() {

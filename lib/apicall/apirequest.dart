@@ -89,6 +89,26 @@ Future<String> Logout() async {
   }
 }
 
+Future<String> familyMemberRegistration(Map fam_obj) async {
+  final sharedpref = await SharedPreferences.getInstance();
+  String token = sharedpref.getString('token') as String;
+  String user = sharedpref.getString('utype') as String;
+  var url = Uri.parse('${ipaddress}/funs/family_memb_reg/');
+  var request = http.MultipartRequest('POST', url);
+  request.fields['utype'] = user;
+  request.fields['token'] = token;
+
+  fam_obj.forEach((key, value) {
+    request.fields[key] = value;
+  });
+  var response =await request.send();
+   if (response.statusCode == 200) {
+    return "complaint Registered";
+  } else {
+    return "complaint not Registered";
+  }
+}
+
 Future<String> complaints_reg(String title, String desc, dynamic img_path,
     {String status = 'Active', String remark = ' '}) async {
   final sharedpref = await SharedPreferences.getInstance();
