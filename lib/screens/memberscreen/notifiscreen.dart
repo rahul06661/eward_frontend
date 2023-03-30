@@ -53,7 +53,7 @@ class notificationscreen extends StatelessWidget {
                   color: Color.fromARGB(96, 215, 20, 20),
                   child: Image.network('${ipaddress}${notification_imgpath}',
                       errorBuilder: (context, error, stackTrace) {
-                    return const Text(" hello");
+                    return const Text("");
                   }),
                 )
               ],

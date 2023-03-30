@@ -32,7 +32,7 @@ class profile_screen extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(28, 320, 0, 0),
+          padding: const EdgeInsets.fromLTRB(0, 320, 0, 0),
           child: Container(
               height: 250,
               child: Column(

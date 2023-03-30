@@ -1,7 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:eward_frontend/screens/userscreen/compregscreen.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
-import 'package:eward_frontend/screens/userscreen/compscreen.dart';
+import 'package:eward_frontend/screens/memberscreen/compscreen.dart';
 
 class compscreen extends StatelessWidget {
   const compscreen({super.key});
@@ -20,6 +22,8 @@ class compscreen extends StatelessWidget {
                     itemCount: data?.length ?? 0,
                     itemBuilder: ((BuildContext context, int index) {
                       final user = snapshot.data?[index];
+                      String complaint_id = user['id'].toString();
+                      
                       String complaint_title = user['name'];
                       String complaint_desc = user['desc'];
                       String complaint_created = user['created_on'];
@@ -38,9 +42,10 @@ class compscreen extends StatelessWidget {
                               subtitle: Text(complaint_desc),
                               trailing: Text(complaint_updated),
                               onTap: () {
-                                Navigator.of(context)
-                                    .push(MaterialPageRoute(builder: ((context) {
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(builder: ((context) {
                                   return complaintscreen(
+                                    complaintId: complaint_id,
                                     complaintTitle: complaint_title,
                                     complaintDesc: complaint_desc,
                                     complaintCreated: complaint_created,
@@ -63,7 +68,8 @@ class compscreen extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: ((context) {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: ((context) {
                   return compregscreens();
                 })));
               },

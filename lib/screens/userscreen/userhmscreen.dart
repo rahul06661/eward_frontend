@@ -11,9 +11,10 @@ class userhomescreen extends StatefulWidget {
 }
 
 class _userhomescreenState extends State<userhomescreen> {
-  @override
   int current_st = 0;
   final pages = const [notificationview(), compscreen(), profile_screen()];
+  @override
+  
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,11 +29,12 @@ class _userhomescreenState extends State<userhomescreen> {
           BottomNavigationBarItem(
               icon: Icon(Icons.supervised_user_circle), label: 'Profile')
         ],
-        onTap: (value) {
+        onTap: ((value) {
           setState(() {
             current_st = value;
           });
-        },
+        }
+        ),
         currentIndex: current_st,
       ),
     );

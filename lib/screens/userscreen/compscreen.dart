@@ -55,15 +55,18 @@ class complaintscreen extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.fromLTRB(15, 15, 15, 30),
                   alignment: Alignment.topLeft,
-                  child: Align(
+                  child: Align(alignment: Alignment.topLeft,
                     child: Text(complaintDesc as String,
                         style: const TextStyle(
+
                             fontWeight: FontWeight.w300, fontSize: 13)),
                   ),
                 ),
                 Container(
                   color: const Color.fromARGB(96, 215, 20, 20),
-                  child: Image.network('${ipaddress}${complaintImgpath}'),
+                  child: Image.network('${ipaddress}${complaintImgpath}',errorBuilder: (context, error, stackTrace) {
+                    return const  Text(" ");
+                  },),
                 ),
                 Container(
                   alignment: Alignment.bottomLeft,

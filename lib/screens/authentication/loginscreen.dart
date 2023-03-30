@@ -3,6 +3,7 @@ import 'package:eward_frontend/screens/memberscreen/memberhmscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
+import 'package:eward_frontend/screens/authentication/signupscreen.dart';
 
 class loginscreen extends StatelessWidget {
   loginscreen({super.key});
@@ -135,6 +136,28 @@ class loginscreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                Row(
+                  children: [
+                    const Text(
+                      'Does not have account?',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    TextButton(
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: ((context) {
+                          return userRegistration();
+                        })));
+                        //signup screen
+                      },
+                    )
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                ),
               ],
             ),
           ),
@@ -143,32 +166,27 @@ class loginscreen extends StatelessWidget {
 
   void checkcredentails(BuildContext contex) async {
     final sharedpref = await SharedPreferences.getInstance();
-   /*  Navigator.of(contex)
-            .pushReplacement(MaterialPageRoute(builder: ((contex) {
-          return userhomescreen();
-        }))); */
-
     final username = t1.text;
     final password = t2.text;
     Map<String, dynamic> resp = await singinapi(username, password);
     if (resp['token'] != null) {
+      String utype = resp['user']['utype'];
       String token = resp['token'];
       int id = resp['user']['id'];
-      String utype = resp['user']['utype'];
       String email = resp['user']['email'];
       sharedpref.setString('token', token);
       sharedpref.setInt('id', id);
       sharedpref.setString('utype', utype);
       sharedpref.setString('email', email);
-      if (utype == "memb") {
-        Navigator.of(contex)
-            .pushReplacement(MaterialPageRoute(builder: ((contex) {
-          return memberhmescreen();
-        })));
-      } else {
+      if (utype == "user") {
         Navigator.of(contex)
             .pushReplacement(MaterialPageRoute(builder: ((contex) {
           return userhomescreen();
+        })));
+      } else if (utype == "memb") {
+        Navigator.of(contex)
+            .pushReplacement(MaterialPageRoute(builder: ((contex) {
+          return membhomescreen();
         })));
       }
     } else {

@@ -1,14 +1,17 @@
-import 'package:flutter/material.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:eward_frontend/screens/userscreen/userhmscreen.dart';
+import 'package:eward_frontend/screens/memberscreen/memberhmscreen.dart';
 
-class compregscreens extends StatelessWidget {
-  compregscreens({super.key});
-  final formkey = GlobalKey<FormState>();
-  final t1 = TextEditingController();
-  final t2 = TextEditingController();
+class notificationRegs extends StatelessWidget {
+  TextEditingController t1 = TextEditingController();
+  TextEditingController t2 = TextEditingController();
   var pickedfile;
+
+  notificationRegs({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -16,10 +19,10 @@ class compregscreens extends StatelessWidget {
           body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
-          margin: const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(10),
           padding: const EdgeInsets.fromLTRB(5, 30, 5, 0),
           decoration: BoxDecoration(
-              color: Color.fromARGB(160, 231, 232, 238),
+              color: Color.fromARGB(2, 231, 232, 238),
               borderRadius: BorderRadius.circular(10)),
           child: Column(children: [
             TextFormField(
@@ -27,7 +30,7 @@ class compregscreens extends StatelessWidget {
               decoration: const InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.black45)),
-                  labelText: "Complaint title"),
+                  labelText: "Notification title"),
             ),
             TextFormField(
               controller: t2,
@@ -38,7 +41,7 @@ class compregscreens extends StatelessWidget {
                     borderSide: BorderSide(color: Colors.black45),
                   ),
                   contentPadding: EdgeInsets.symmetric(vertical: 50),
-                  labelText: "Complaint desc"),
+                  labelText: "Notification desc"),
             ),
             const SizedBox(
               height: 400,
@@ -63,7 +66,7 @@ class compregscreens extends StatelessWidget {
                       MaterialStateProperty.all(Colors.transparent),
                   shadowColor: MaterialStateProperty.all(Colors.transparent),
                 ),
-                child: const Text("Upload image"),
+                child: const Text("Upload Image"),
               ),
             ),
             const SizedBox(
@@ -80,10 +83,10 @@ class compregscreens extends StatelessWidget {
                   ])),
               child: ElevatedButton(
                 onPressed: (() {
-                  Future<String> resp = compreg(context);
+                  notificationreg(context);
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return userhomescreen();
+                    return const membhomescreen();
                   }));
                 }),
                 style: ButtonStyle(
@@ -91,7 +94,7 @@ class compregscreens extends StatelessWidget {
                       MaterialStateProperty.all(Colors.transparent),
                   shadowColor: MaterialStateProperty.all(Colors.transparent),
                 ),
-                child: const Text("Register Complaint"),
+                child: const Text("Post Notification"),
               ),
             )
           ]),
@@ -100,18 +103,11 @@ class compregscreens extends StatelessWidget {
     );
   }
 
-  Future<String> compreg(context) async{
+  void notificationreg(context) async {
     String title = t1.text;
     String desc = t2.text;
-    print(title);
-    print(desc);
-    print(pickedfile);
 
-    var comp_status = await complaints_reg(title, desc, pickedfile);
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        behavior: SnackBarBehavior.floating,
-        content: Text(comp_status),
-      ));
-    return comp_status;
+    String resp = await postnotification(title, desc, pickedfile);
+    return;
   }
 }

@@ -46,281 +46,305 @@ class MyCustomFormState extends State<famMemberReg> {
   String? selectedrelation;
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Material(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: TextFormField(
-                  controller: t1,
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Enter Email',
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: TextFormField(
-                  controller: t2,
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Enter Firstname',
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: TextFormField(
-                  controller: t3,
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Enter Lastname',
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: TextFormField(
-                  controller: t4,
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Enter Voter_id',
-                  ),
-                ),
-              ),
-              Padding(
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Material(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: RadioListTile(
-                          title: const Text('Male'),
-                          value: 'male',
-                          groupValue: selectedoption,
-                          onChanged: ((value) {
-                            setState(() {
-                              selectedoption = value;
-                            });
-                          }),
-                        ),
-                      ),
-                      Expanded(
-                        child: RadioListTile(
-                          title: const Text('Female'),
-                          value: 'female',
-                          groupValue: selectedoption,
-                          onChanged: ((value) {
-                            setState(() {
-                              selectedoption = value;
-                            });
-                          }),
-                        ),
-                      ),
-                      Expanded(
-                        child: RadioListTile(
-                          title: const Text('Others'),
-                          value: 'others',
-                          groupValue: selectedoption,
-                          onChanged: ((value) {
-                            setState(() {
-                              selectedoption = value;
-                            });
-                          }),
-                        ),
-                      ),
-                    ],
-                  )),
-              Padding(
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    controller: t1,
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter Email',
+                    ),
+                  ),
+                ),
+                Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: RadioListTile(
-                          title: const Text('Paying Tax'),
-                          value: 'yes',
-                          groupValue: select_tax,
-                          onChanged: ((value) {
-                            setState(() {
-                              select_tax = value;
-                            });
-                          }),
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    controller: t2,
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter Firstname',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    controller: t3,
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter Lastname',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    controller: t4,
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter Voter_id',
+                    ),
+                  ),
+                ),
+                Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: RadioListTile(
+                            title: const Text('Male',style:TextStyle(
+                              fontSize: 15
+                            )),
+                            value: 'male',
+                            groupValue: selectedoption,
+                            onChanged: ((value) {
+                              setState(() {
+                                selectedoption = value;
+                              });
+                            }),
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: RadioListTile(
-                          title: const Text('Not Paying Tax'),
-                          value: 'no',
-                          groupValue: select_tax,
-                          onChanged: ((value) {
-                            setState(() {
-                              select_tax = value;
-                            });
-                          }),
+                        Expanded(
+                          child: RadioListTile(
+                            title: const Text('Female',style:TextStyle(
+                              fontSize: 15
+                            )),
+                            value: 'female',
+                            groupValue: selectedoption,
+                            onChanged: ((value) {
+                              setState(() {
+                                selectedoption = value;
+                              });
+                            }),
+                          ),
                         ),
-                      ),
-                    ],
-                  )),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: Container(
-                    width: double.infinity,
-                    child: DropdownButton(
-                      isExpanded: true,
-                      hint: const Text(
-                        "Select job",
-                      ),
-                      value: selectedjob,
-                      items: jobs.map((String items) {
-                        return DropdownMenuItem(
-                          value: items,
-                          child: Text(items),
-                        );
-                      }).toList(),
-                      onChanged: ((value) {
-                        setState(() {
-                          selectedjob = value;
-                        });
-                      }),
+                        Expanded(
+                          child: RadioListTile(
+                            title: const Text('Others',
+                            style:TextStyle(
+                              fontSize: 15
+                            )),
+                            value: 'others',
+                            groupValue: selectedoption,
+                            onChanged: ((value) {
+                              setState(() {
+                                selectedoption = value;
+                              });
+                            }),
+                          ),
+                        ),
+                      ],
                     )),
-              ),
-              Padding(
+                Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: RadioListTile(
+                            title: const Text('Paying Tax'),
+                            value: 'yes',
+                            groupValue: select_tax,
+                            onChanged: ((value) {
+                              setState(() {
+                                select_tax = value;
+                              });
+                            }),
+                          ),
+                        ),
+                        Expanded(
+                          child: RadioListTile(
+                            title: const Text('Not Paying Tax'),
+                            value: 'no',
+                            groupValue: select_tax,
+                            onChanged: ((value) {
+                              setState(() {
+                                select_tax = value;
+                              });
+                            }),
+                          ),
+                        ),
+                      ],
+                    )),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: Container(
+                      width: double.infinity,
+                      child: DropdownButton(
+                        isExpanded: true,
+                        hint: const Text(
+                          "Select job",
+                        ),
+                        value: selectedjob,
+                        items: jobs.map((String items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(items),
+                          );
+                        }).toList(),
+                        onChanged: ((value) {
+                          setState(() {
+                            selectedjob = value;
+                          });
+                        }),
+                      )),
+                ),
+                Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: Container(
+                      width: double.infinity,
+                      child: DropdownButton(
+                        value: selectedbloodgroup,
+                        onChanged: ((value) {
+                          setState(() {
+                            selectedbloodgroup = value;
+                          });
+                        }),
+                        isExpanded: true,
+                        hint: const Text("Blood group"),
+                        items: blood_group.map((String items) {
+                          return DropdownMenuItem(
+                              value: items, child: Text(items));
+                        }).toList(),
+                      ),
+                    )),
+                Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: Container(
                     width: double.infinity,
                     child: DropdownButton(
-                      onChanged: ((value) {
-                        setState(() {
-                          selectedbloodgroup = value;
-                        });
-                      }),
                       isExpanded: true,
-                      hint: const Text("Blood group"),
-                      items: blood_group.map((String items) {
+                      hint: const Text(
+                        "Select qualification",
+                      ),
+                      value: selectedqualification,
+                      items: qualification.map((String items) {
                         return DropdownMenuItem(
-                            value: items, child: Text(items));
+                          value: items,
+                          child: Text(items),
+                        );
                       }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedqualification = newValue;
+                        });
+                      },
                     ),
-                  )),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: Container(
-                  width: double.infinity,
-                  child: DropdownButton(
-                    isExpanded: true,
-                    hint: const Text(
-                      "Select qualification",
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    controller: t5,
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter Age',
                     ),
-                    value: selectedqualification,
-                    items: qualification.map((String items) {
-                      return DropdownMenuItem(
-                        value: items,
-                        child: Text(items),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedqualification = newValue;
-                      });
-                    },
                   ),
                 ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: TextFormField(
-                  controller: t5,
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Enter Age',
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: TextFormField(
-                  controller: t6,
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Enter Phone Number',
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: Container(
-                  width: double.infinity,
-                  child: DropdownButton(
-                    isExpanded: true,
-                    hint: const Text(
-                      "Select Relation",
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    controller: t6,
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter Phone Number',
                     ),
-                    value: selectedrelation,
-                    items: relation.map((String items) {
-                      return DropdownMenuItem(
-                        value: items,
-                        child: Text(items),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedrelation = newValue;
-                      });
-                    },
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    var familymap = Map();
-                    familymap['email'] = t1.text;
-                    familymap['firstname'] = t2.text;
-                    familymap['lastname'] = t3.text;
-                    familymap['voter_id'] = t4.text;
-                    familymap['tax_payer'] = select_tax;
-                    familymap['gender'] = selectedoption;
-                    familymap['age'] = t5.text;
-                    familymap['job'] = selectedjob;
-                    familymap['qualification'] = selectedqualification;
-                    familymap['relation'] = selectedrelation;
-                    familymap['phone'] = t6.text;
-                    String response =
-                        familyMemberRegistration(familymap) as String;
-
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        behavior: SnackBarBehavior.floating,
-                        content: Text(response),
-                      ));
-
-                      return const profile_screen();
-                    }));
-                  },
-                  child: const Text('Register Family Member '),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: Container(
+                    width: double.infinity,
+                    child: DropdownButton(
+                      isExpanded: true,
+                      hint: const Text(
+                        "Select Relation",
+                      ),
+                      value: selectedrelation,
+                      items: relation.map((String items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Text(items),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedrelation = newValue;
+                        });
+                      },
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Container(
+                      height: 50,
+                      width: 430,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: const LinearGradient(colors: [
+                            Color.fromRGBO(143, 148, 251, 1),
+                            Color.fromRGBO(143, 148, 251, 2)
+                          ])),
+                      child: ElevatedButton(
+                        onPressed: (() async {
+                          var familymap = Map();
+                          familymap['email'] = t1.text;
+                          familymap['firstname'] = t2.text;
+                          familymap['lastname'] = t3.text;
+                          familymap['voter_id'] = t4.text;
+                          familymap['tax_payer'] = select_tax;
+                          familymap['gender'] = selectedoption;
+                          familymap['age'] = t5.text;
+                          familymap['job'] = selectedjob;
+                          familymap['qualification'] = selectedqualification;
+                          familymap['relation'] = selectedrelation;
+                          familymap['phone'] = t6.text;
+                          familymap['blood_group'] = selectedbloodgroup;
+                          String response =
+                              await familyMemberRegistration(familymap);
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) {
+                            return const profile_screen();
+                          }));
+    
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              content: Text(response)));
+                        }),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                          shadowColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                        ),
+                        child: const Text('Register Family Member '),
+                      ),
+                    )),
+              ],
+            ),
           ),
         ),
       ),

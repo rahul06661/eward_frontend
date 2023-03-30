@@ -1,35 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:eward_frontend/screens/memberscreen/notificationview.dart';
+import 'package:eward_frontend/screens/userscreen/profilescreen.dart';
+import 'package:eward_frontend/screens/memberscreen/complaintview.dart';
 
-class memberhmescreen extends StatefulWidget {
-  const memberhmescreen({super.key});
+class membhomescreen extends StatefulWidget {
+  const membhomescreen({super.key});
 
   @override
-  State<memberhmescreen> createState() => _memberhmescreen();
+  State<membhomescreen> createState() => _userhomescreenState();
 }
 
-class _memberhmescreen extends State<memberhmescreen> {
-  int index = 0;
+class _userhomescreenState extends State<membhomescreen> {
+  int current_st = 0;
+  final pages = const [notificationview(), compscreen(), profile_screen()];
   @override
+  
+
   Widget build(BuildContext context) {
     return Scaffold(
+      body: pages[current_st],
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.circle_notifications_rounded),
-              label: "Notifications"),
+              label: 'Notification'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.crisis_alert), label: "Complaints"),
+              icon: Icon(Icons.crisis_alert), label: 'Complaints'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.request_page), label: "Requests"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.supervised_user_circle), label: "Account"),
+              icon: Icon(Icons.supervised_user_circle), label: 'Profile')
         ],
         onTap: ((value) {
           setState(() {
-            index = value;
+            current_st = value;
           });
-        }),
-        currentIndex: index,
+        }
+        ),
+        currentIndex: current_st,
       ),
     );
   }
