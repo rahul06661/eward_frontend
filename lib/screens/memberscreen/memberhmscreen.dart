@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:eward_frontend/screens/memberscreen/notificationview.dart';
-import 'package:eward_frontend/screens/userscreen/profilescreen.dart';
 import 'package:eward_frontend/screens/memberscreen/complaintview.dart';
+import 'package:eward_frontend/screens/memberscreen/account.dart';
 
 class membhomescreen extends StatefulWidget {
   const membhomescreen({super.key});
@@ -26,8 +26,9 @@ class _userhomescreenState extends State<membhomescreen> {
               label: 'Notification'),
           BottomNavigationBarItem(
               icon: Icon(Icons.crisis_alert), label: 'Complaints'),
+              
           BottomNavigationBarItem(
-              icon: Icon(Icons.supervised_user_circle), label: 'Profile')
+              icon: Icon(Icons.supervised_user_circle), label: 'Profile'),
         ],
         onTap: ((value) {
           setState(() {

@@ -32,15 +32,19 @@ class notificationRegs extends StatelessWidget {
                       borderSide: BorderSide(color: Colors.black45)),
                   labelText: "Notification title"),
             ),
+            const SizedBox(
+              height: 100,
+            ),
+           
             TextFormField(
               controller: t2,
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              decoration: const InputDecoration(
+              decoration: const InputDecoration( 
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.black45),
                   ),
-                  contentPadding: EdgeInsets.symmetric(vertical: 50),
+                  contentPadding: EdgeInsets.symmetric(vertical: 10),
                   labelText: "Notification desc"),
             ),
             const SizedBox(
@@ -85,7 +89,7 @@ class notificationRegs extends StatelessWidget {
                 onPressed: (() {
                   notificationreg(context);
                   Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
+                      .pushReplacement(MaterialPageRoute(builder: (context) {
                     return const membhomescreen();
                   }));
                 }),

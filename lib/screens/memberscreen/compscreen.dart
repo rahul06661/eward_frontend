@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:eward_frontend/globals/globalvar.dart' as globals;
 import 'package:eward_frontend/apicall/apirequest.dart';
 import 'package:eward_frontend/screens/memberscreen/complaintview.dart';
+import 'package:eward_frontend/screens/userscreen/chat_screen.dart';
 
 String ipaddress = globals.ipaddress;
 
@@ -13,8 +14,7 @@ class complaintscreen extends StatelessWidget {
       complaintCreated,
       complaintUpdated,
       complaintImgpath,
-      complaintStatus,
-      complaintRemark;
+      complaintStatus;
 
   complaintscreen({
     super.key,
@@ -25,8 +25,8 @@ class complaintscreen extends StatelessWidget {
     this.complaintUpdated,
     this.complaintImgpath,
     this.complaintStatus,
-    this.complaintRemark,
   });
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -59,12 +59,19 @@ class complaintscreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  color: const Color.fromARGB(96, 215, 20, 20),
                   child: Image.network(
                     '${ipaddress}${complaintImgpath}',
                     errorBuilder: (context, error, stackTrace) {
-                      return const Text("helo ");
+                      return const Text("");
                     },
+                  ),
+                ),
+                Container(
+                  height: 350,
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  decoration: BoxDecoration(border: Border.all(width: 1)),
+                  child: Container(
+                    child: const MyWidget(),
                   ),
                 ),
                 Container(
@@ -98,7 +105,9 @@ class complaintscreen extends StatelessWidget {
                     ),
                     child: const Text("Update Remark"),
                   ),
-                )
+                ),
+                
+                
               ],
             ),
           ),
@@ -109,21 +118,19 @@ class complaintscreen extends StatelessWidget {
 
   void updatecomplaint(context) async {
     String remark = t1.text;
-    if (remark == " ") {
-      Navigator.of(context).push(MaterialPageRoute(
+    if (remark == "") {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) {
-          return compscreen();
+          return this.build(context);
         },
       ));
     } else {
-      Navigator.of(context).push(MaterialPageRoute(
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) {
-          return compscreen();
+          return this.build(context);
         },
       ));
     }
-    print("____________________________________________________");
-    print(complaintId.runtimeType);
     String response = await updateRemark(remark, complaintId) as String;
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(

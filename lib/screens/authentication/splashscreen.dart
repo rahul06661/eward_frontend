@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:eward_frontend/screens/authentication/loginscreen.dart';
+import 'package:eward_frontend/screens/userscreen/chat_screen.dart';
 
 class splash_screen extends StatefulWidget {
   splash_screen({super.key});

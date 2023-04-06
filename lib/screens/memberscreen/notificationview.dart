@@ -33,7 +33,7 @@ class notificationview extends StatelessWidget {
                               Image.asset("assets/images/notification.png"),
                           title: Text(notification_title),
                           trailing: Text(notification_updated),
-                          subtitle: Text(notification_desc),
+                          subtitle: Text(notification_desc,overflow: TextOverflow.ellipsis),
                           onTap: () {
                             Navigator.of(context)
                                 .push(MaterialPageRoute(builder: ((context) {
@@ -47,11 +47,12 @@ class notificationview extends StatelessWidget {
                           },
                         ),
                       ));
-                }));
+                })
+                );
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            return const CircularProgressIndicator();
+            return Center(child: const CircularProgressIndicator());
           }
         }),
       ),

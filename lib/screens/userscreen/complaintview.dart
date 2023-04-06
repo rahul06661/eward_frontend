@@ -20,13 +20,14 @@ class compscreen extends StatelessWidget {
                     itemCount: data?.length ?? 0,
                     itemBuilder: ((BuildContext context, int index) {
                       final user = snapshot.data?[index];
+                      String complaint_id = user['id'].toString();
                       String complaint_title = user['name'];
                       String complaint_desc = user['desc'];
                       String complaint_created = user['created_on'];
                       String complaint_updated = user['update_on'];
                       String complaint_imgpath = user['img_path'];
                       String complaint_status = user['status'];
-                      String complaint_remark = user['remark'];
+                      
                       return Card(
                           elevation: 0,
                           child: SizedBox(
@@ -35,18 +36,19 @@ class compscreen extends StatelessWidget {
                               leading:
                                   Image.asset("assets/images/notification.png"),
                               title: Text(complaint_title),
-                              subtitle: Text(complaint_desc),
+                              subtitle: Text(complaint_desc,overflow: TextOverflow.ellipsis),
                               trailing: Text(complaint_updated),
                               onTap: () {
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: ((context) {
                                   return complaintscreen(
+                                    complaintId: complaint_id,
                                     complaintTitle: complaint_title,
                                     complaintDesc: complaint_desc,
                                     complaintCreated: complaint_created,
                                     complaintImgpath: complaint_imgpath,
                                     complaintStatus: complaint_status,
-                                    complaintRemark: complaint_remark,
+                                    
                                     complaintUpdated: complaint_updated,
                                   );
                                 })));
@@ -57,7 +59,7 @@ class compscreen extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else {
-                return const CircularProgressIndicator();
+                return Center(child: const CircularProgressIndicator());
               }
             }),
           ),

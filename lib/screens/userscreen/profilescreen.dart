@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:eward_frontend/screens/userscreen/clipper_profile.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
 import 'package:eward_frontend/screens/authentication/loginscreen.dart';
 import 'package:eward_frontend/screens/userscreen/family_memb.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class profile_screen extends StatelessWidget {
   const profile_screen({super.key});
@@ -17,14 +19,19 @@ class profile_screen extends StatelessWidget {
           child: Container(
             height: 80,
             decoration: const BoxDecoration(
+              image:  DecorationImage(
+      image: AssetImage("assets/images/notification.png"),
+     
+    ),
+              
                 shape: BoxShape.circle,
                 color: Color.fromARGB(255, 210, 206, 206)),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(235, 125, 0, 0),
+          padding: const EdgeInsets.fromLTRB(175, 125, 0, 0),
           child: Container(
-            child: Text("U",
+            child: Text("" ,
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 50,
@@ -62,13 +69,13 @@ class profile_screen extends StatelessWidget {
                     width: 430,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color:const  Color.fromRGBO(143, 148, 251, 2),
+                      color: const Color.fromRGBO(143, 148, 251, 2),
                     ),
                     child: ElevatedButton(
                       onPressed: (() {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return const  famMemberReg();
+                          return const famMemberReg();
                         }));
                       }),
                       style: ButtonStyle(
@@ -86,7 +93,7 @@ class profile_screen extends StatelessWidget {
                     width: 430,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color:const  Color.fromRGBO(143, 148, 251, 2),
+                      color: const Color.fromRGBO(143, 148, 251, 2),
                     ),
                     child: ElevatedButton(
                       onPressed: (() {
@@ -108,6 +115,14 @@ class profile_screen extends StatelessWidget {
         )
       ],
     );
+  }
+
+  Future<String> getchar() async {
+    final sharepref = await SharedPreferences.getInstance();
+    String name = sharepref.getString('email').toString();
+    print(name);
+
+    return name[0];
   }
 
   void signout(context) async {

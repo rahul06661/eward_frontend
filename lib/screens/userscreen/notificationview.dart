@@ -8,12 +8,15 @@ class notificationview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(31, 219, 112, 11),
         body: FutureBuilder<List<dynamic>>(
+        
       future: Future.value(notification()),
       builder: ((BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.hasData) {
           final data = snapshot.data;
           return ListView.builder(
+            
               itemCount: data?.length ?? 0,
               itemBuilder: ((BuildContext context, int index) {
                 final user = snapshot.data?[index];
@@ -30,7 +33,7 @@ class notificationview extends StatelessWidget {
                         leading: Image.asset("assets/images/notification.png"),
                         title: Text(notification_title),
                         trailing: Text(notification_updated),
-                        subtitle: Text(notification_desc),
+                        subtitle: Text(notification_desc,overflow: TextOverflow.ellipsis),
                         onTap: () {
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: ((context) {
@@ -48,7 +51,7 @@ class notificationview extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
-          return const CircularProgressIndicator();
+          return Center(child: const CircularProgressIndicator());
         }
       }),
     ));

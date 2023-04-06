@@ -16,10 +16,10 @@ class compregscreens extends StatelessWidget {
           body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
-          margin: const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(10),
           padding: const EdgeInsets.fromLTRB(5, 30, 5, 0),
           decoration: BoxDecoration(
-              color: Color.fromARGB(160, 231, 232, 238),
+              color: Color.fromARGB(5, 231, 232, 238),
               borderRadius: BorderRadius.circular(10)),
           child: Column(children: [
             TextFormField(
@@ -29,6 +29,9 @@ class compregscreens extends StatelessWidget {
                       borderSide: BorderSide(color: Colors.black45)),
                   labelText: "Complaint title"),
             ),
+            const SizedBox(
+              height: 100,
+            ),
             TextFormField(
               controller: t2,
               keyboardType: TextInputType.multiline,
@@ -37,7 +40,7 @@ class compregscreens extends StatelessWidget {
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.black45),
                   ),
-                  contentPadding: EdgeInsets.symmetric(vertical: 50),
+                  contentPadding: EdgeInsets.symmetric(vertical: 10),
                   labelText: "Complaint desc"),
             ),
             const SizedBox(
@@ -63,7 +66,7 @@ class compregscreens extends StatelessWidget {
                       MaterialStateProperty.all(Colors.transparent),
                   shadowColor: MaterialStateProperty.all(Colors.transparent),
                 ),
-                child: const Text("Upload image"),
+                child: const Text("Upload Image"),
               ),
             ),
             const SizedBox(
@@ -100,7 +103,7 @@ class compregscreens extends StatelessWidget {
     );
   }
 
-  Future<String> compreg(context) async{
+  Future<String> compreg(context) async {
     String title = t1.text;
     String desc = t2.text;
     print(title);
@@ -109,9 +112,9 @@ class compregscreens extends StatelessWidget {
 
     var comp_status = await complaints_reg(title, desc, pickedfile);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        behavior: SnackBarBehavior.floating,
-        content: Text(comp_status),
-      ));
+      behavior: SnackBarBehavior.floating,
+      content: Text(comp_status),
+    ));
     return comp_status;
   }
 }
