@@ -143,6 +143,7 @@ Future<List<dynamic>> complaints() async {
 }
 
 Future<List<dynamic>> get_chat(compId) async {
+  print(compId);
   var url = Uri.parse('${ipaddress}/funs/messages/');
   var request = http.MultipartRequest('POST', url);
   request.fields['id'] = compId;
@@ -152,6 +153,7 @@ Future<List<dynamic>> get_chat(compId) async {
     var jsonresp = await response.stream.bytesToString();
     final jsonresps = jsonDecode(jsonresp);
     if (jsonresps['msg'] == 'sucess') {
+      
       return jsonresps['messages'];
     } else {
       return ["requst not completed"];
@@ -161,6 +163,43 @@ Future<List<dynamic>> get_chat(compId) async {
   }
 }
 
+Future<String> closeComplaint(compId) async {
+  var url = Uri.parse('${ipaddress}/funs/closeComplaint/');
+  var request = http.MultipartRequest('POST', url);
+  request.fields['id'] = compId;
+  request.headers['Content-Type'] = 'multipart/form-data';
+  var response = await request.send();
+  Future.delayed(Duration(milliseconds: 30));
+  if (response.statusCode == 200) {
+    var jsonresp = await response.stream.bytesToString();
+    final jsonresps = jsonDecode(jsonresp);
+
+    return jsonresps['msg'];
+  } else {
+    return "requst not completed";
+  }
+}
+
+Future<String> getStatus(compId) async {
+  var url = Uri.parse('${ipaddress}/funs/getstatus/');
+  var request = http.MultipartRequest('POST', url);
+  request.fields['id'] = compId;
+  request.headers['Content-Type'] = 'multipart/form-data';
+  var response = await request.send();
+  if (response.statusCode == 200) {
+    var jsonresp = await response.stream.bytesToString();
+    final jsonresps = jsonDecode(jsonresp);
+    if (jsonresps['msg'] == 'sucess') {
+      print("********************************");
+      print(jsonresps['status']);
+      return jsonresps['status'];
+    } else {
+      return "requst not completed";
+    }
+  } else {
+    return "requst not completed";
+  }
+}
 
 Future<String> Logout() async {
   final shreprf = await SharedPreferences.getInstance();

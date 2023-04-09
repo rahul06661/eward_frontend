@@ -4,14 +4,15 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
 
 class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+  String? id;
+  MyWidget({super.key, this.id});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: FutureBuilder<List<dynamic>>(
-          future: Future.value(get_chat('1')),
+          future: Future.value(get_chat(id)),
           builder:
               ((BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
             if (snapshot.hasData) {
@@ -22,17 +23,39 @@ class MyWidget extends StatelessWidget {
                     final user = snapshot.data?[index];
                     String messgae = user['comment'];
                     String users = user['user'];
-                    String time=user['update_on'];
+                    String time = convert(user['update_on']);
 
                     return Card(
                         elevation: 0,
                         child: SizedBox(
-                          height: 50,
-                          child: Column(children: [
-                            Text(users+':     '+messgae),
-                            Text(time)
-                          ],)
-                        ));
+                            height: 50,
+                            
+                            child: Column(
+                              
+                              
+                              mainAxisAlignment:MainAxisAlignment.spaceEvenly ,
+                              children: [
+                               Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                Text(users,style: TextStyle(fontSize: 15),),
+                                Text(":"),
+                                Text(messgae),
+
+                               ],)
+                               ,
+                               Text(" "),
+                               
+                               Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+
+                                 children: [
+                                  
+                                   Text(time),
+                                 ],
+                               )
+                              ],
+                            )));
                   }));
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
@@ -44,4 +67,12 @@ class MyWidget extends StatelessWidget {
       ),
     );
   }
+  String  convert(sample) {
+  
+  List<String> data=sample.split('T');
+  String date=data[0];
+  String time=data[1].split('.')[0];
+  return '$date $time';
+  
+}
 }

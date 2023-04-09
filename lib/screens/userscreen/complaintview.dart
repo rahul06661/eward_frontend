@@ -27,7 +27,7 @@ class compscreen extends StatelessWidget {
                       String complaint_updated = user['update_on'];
                       String complaint_imgpath = user['img_path'];
                       String complaint_status = user['status'];
-                      
+
                       return Card(
                           elevation: 0,
                           child: SizedBox(
@@ -36,11 +36,12 @@ class compscreen extends StatelessWidget {
                               leading:
                                   Image.asset("assets/images/notification.png"),
                               title: Text(complaint_title),
-                              subtitle: Text(complaint_desc,overflow: TextOverflow.ellipsis),
+                              subtitle: Text(complaint_desc,
+                                  overflow: TextOverflow.ellipsis),
                               trailing: Text(complaint_updated),
                               onTap: () {
-                                Navigator.of(context)
-                                    .push(MaterialPageRoute(builder: ((context) {
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(builder: ((context) {
                                   return complaintscreen(
                                     complaintId: complaint_id,
                                     complaintTitle: complaint_title,
@@ -48,7 +49,6 @@ class compscreen extends StatelessWidget {
                                     complaintCreated: complaint_created,
                                     complaintImgpath: complaint_imgpath,
                                     complaintStatus: complaint_status,
-                                    
                                     complaintUpdated: complaint_updated,
                                   );
                                 })));
@@ -65,7 +65,8 @@ class compscreen extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: ((context) {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: ((context) {
                   return compregscreens();
                 })));
               },

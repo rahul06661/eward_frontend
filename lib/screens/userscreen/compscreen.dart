@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:eward_frontend/globals/globalvar.dart' as globals;
-import 'package:eward_frontend/screens/userscreen/complaintview.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
 import 'package:eward_frontend/screens/userscreen/chat_screen.dart';
+import 'package:eward_frontend/screens/memberscreen/status.dart';
+import 'package:eward_frontend/screens/userscreen/userhmscreen.dart';
 
 String ipaddress = globals.ipaddress;
 
-class complaintscreen extends StatelessWidget {
+class complaintscreen extends StatefulWidget {
   String? complaintId = '',
       complaintTitle = ' ',
       complaintDesc = ' ',
@@ -14,7 +15,6 @@ class complaintscreen extends StatelessWidget {
       complaintUpdated = ' ',
       complaintImgpath = ' ',
       complaintStatus = ' ';
-  TextEditingController t1 = TextEditingController();
 
   complaintscreen({
     super.key,
@@ -26,21 +26,26 @@ class complaintscreen extends StatelessWidget {
     this.complaintImgpath,
     this.complaintStatus,
   });
+
+  @override
+  State<complaintscreen> createState() => _complaintscreenState();
+}
+
+class _complaintscreenState extends State<complaintscreen> {
+  TextEditingController t1 = TextEditingController();
+  String status = '1';
+  @override
+  void initState() {
+    getState();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool colr;
-    if (complaintStatus == "Active") {
-      colr = true;
-    } else {
-      colr = false;
-    }
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
-            color: colr
-                ? const Color.fromARGB(191, 206, 149, 149)
-                : Color.fromARGB(159, 115, 228, 115),
             padding: const EdgeInsets.fromLTRB(15, 15, 15, 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -48,10 +53,10 @@ class complaintscreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(complaintTitle as String,
+                    Text(widget.complaintTitle as String,
                         style: const TextStyle(
                             fontWeight: FontWeight.w400, fontSize: 18)),
-                    Text(complaintUpdated as String,
+                    Text(widget.complaintUpdated as String,
                         style: const TextStyle(
                             fontStyle: FontStyle.italic, fontSize: 14))
                   ],
@@ -61,62 +66,73 @@ class complaintscreen extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   child: Align(
                     alignment: Alignment.topLeft,
-                    child: Text(complaintDesc as String,
+                    child: Text(widget.complaintDesc as String,
                         style: const TextStyle(
                             fontWeight: FontWeight.w300, fontSize: 13)),
                   ),
                 ),
                 Container(
                   child: Image.network(
-                    '${ipaddress}${complaintImgpath}',
+                    '${ipaddress}${widget.complaintImgpath}',
                     errorBuilder: (context, error, stackTrace) {
                       return const Text("");
                     },
                   ),
                 ),
+                statusbar(states: int.parse(status)),
                 Container(
                   height: 350,
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                   decoration: BoxDecoration(border: Border.all(width: 1)),
                   child: Container(
-                    child:const MyWidget() ,
+                    child: MyWidget(id: widget.complaintId),
                   ),
                 ),
+                int.parse(status) != 3
+                    ? Container(
+                        padding: const EdgeInsets.fromLTRB(15, 15, 15, 30),
+                        child: TextFormField(
+                          controller: t1,
+                          decoration: const InputDecoration(
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.black45)),
+                              labelText: "Remark About complanit"),
+                        ),
+                      )
+                    : Text("Complaint Closed"),
+                int.parse(status) != 3
+                    ? Container(
+                        height: 50,
+                        width: 430,
+                        child: ElevatedButton(
+                            onPressed: (() {
+                              updatecomplaint(context);
+                            }),
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                              shadowColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                            ),
+                            child: Image.asset("assets/images/arrow.png")),
+                      )
+                    : const Text(" "),
                 Container(
                   padding: const EdgeInsets.fromLTRB(15, 15, 15, 30),
-                  child: TextFormField(
-                    controller: t1,
-                    decoration: const InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black45)),
-                        labelText: "Remark About complanit"),
-                  ),
-                ),
-                Container(
-                  height: 50,
-                  width: 430,
-                  
-                  child: ElevatedButton(
-                    onPressed: (() {
-                      updatecomplaint(context);
-                    }),
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                      shadowColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                    ),
-                    child: Image.asset("assets/images/arrow.png")
-                  ),
-                  
-                ),
-
-                Container(
-                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 30),
-                child: ElevatedButton(onPressed: (() {
-                  
-                }),
-                  child: Text("Close Complaint")),
+                  child: int.parse(status) == 3
+                      ? null
+                      : ElevatedButton(
+                          onPressed: (() {
+                            closeComplaint(widget.complaintId);
+                            Navigator.of(context)
+                                .pushReplacement(MaterialPageRoute(
+                              builder: (context) {
+                                return userhomescreen();
+                              },
+                            ));
+                          }),
+                          child: Text("Close Complaint")),
                 ),
               ],
             ),
@@ -126,22 +142,29 @@ class complaintscreen extends StatelessWidget {
     );
   }
 
+  void getState() async {
+    status = await getStatus(widget.complaintId);
+    setState(() {
+      status = status;
+    });
+  }
+
   void updatecomplaint(context) async {
     String remark = t1.text;
     if (remark == "") {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) {
-          return MyWidget();
+          return this.build(context);
         },
       ));
     } else {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) {
-          return MyWidget();
+          return this.build(context);
         },
       ));
     }
-    String response = await updateRemark(remark, complaintId) as String;
+    String response = await updateRemark(remark, widget.complaintId) as String;
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       behavior: SnackBarBehavior.floating,
