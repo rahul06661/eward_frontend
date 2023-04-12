@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
 import 'package:eward_frontend/screens/authentication/signupscreen.dart';
 import 'package:eward_frontend/screens/adminscreens/adminhomepage.dart';
+import 'package:eward_frontend/screens/adminscreens/adminnav.dart';
 
 class loginscreen extends StatelessWidget {
   loginscreen({super.key});
@@ -141,7 +142,8 @@ class loginscreen extends StatelessWidget {
                   children: [
                     const Text(
                       'Does not have account?',
-                      style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                     ),
                     TextButton(
                       child: const Text(
@@ -175,7 +177,7 @@ class loginscreen extends StatelessWidget {
       sharedpref.setString('utype', 'admin');
       Navigator.of(contex)
           .pushReplacement(MaterialPageRoute(builder: ((contex) {
-        return adminHomeScreen();
+        return adminhomenav();
       })));
     }
 
@@ -204,7 +206,6 @@ class loginscreen extends StatelessWidget {
       ScaffoldMessenger.of(contex).showSnackBar(SnackBar(
         behavior: SnackBarBehavior.floating,
         content: Text(resp['error']),
-        
       ));
     }
   }

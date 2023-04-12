@@ -16,6 +16,7 @@ class notificationRegs extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+         appBar: AppBar(title: Text("Post Notification")),
           body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -27,10 +28,11 @@ class notificationRegs extends StatelessWidget {
           child: Column(children: [
             TextFormField(
               controller: t1,
-              decoration: const InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black45)),
-                  labelText: "Notification title"),
+              decoration: const  InputDecoration(
+               
+                hintText: 'Notification Title',
+                border: OutlineInputBorder(),
+              ),
             ),
             const SizedBox(
               height: 100,
@@ -40,24 +42,27 @@ class notificationRegs extends StatelessWidget {
               controller: t2,
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              decoration: const InputDecoration( 
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black45),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(vertical: 10),
-                  labelText: "Notification desc"),
+              decoration:  const InputDecoration(
+                
+                contentPadding: EdgeInsets.symmetric(vertical: 55),
+                hintText: 'Notification  Descrption',
+                border: const OutlineInputBorder(),
+              ),
             ),
             const SizedBox(
-              height: 400,
+              height: 250,
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children:[
             Container(
               height: 50,
-              width: 430,
+              width: 150,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   gradient: const LinearGradient(colors: [
-                    Color.fromRGBO(143, 148, 251, 1),
-                    Color.fromRGBO(143, 148, 251, 2)
+                     Color.fromARGB(255, 0, 98, 255),
+                         Color.fromARGB(255, 0, 98, 255),
                   ])),
               child: ElevatedButton(
                 onPressed: (() async {
@@ -70,9 +75,34 @@ class notificationRegs extends StatelessWidget {
                       MaterialStateProperty.all(Colors.transparent),
                   shadowColor: MaterialStateProperty.all(Colors.transparent),
                 ),
-                child: const Text("Upload Image"),
+                child: const Text("Upload Image from Camera"),
               ),
             ),
+
+            Container(
+              height: 50,
+              width: 150,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  gradient: const LinearGradient(colors: [
+                     Color.fromARGB(255, 0, 98, 255),
+                         Color.fromARGB(255, 0, 98, 255),
+                  ])),
+              child: ElevatedButton(
+                onPressed: (() async {
+                  final picker = ImagePicker();
+                  pickedfile =
+                      await picker.pickImage(source: ImageSource.gallery);
+                }),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.transparent),
+                  shadowColor: MaterialStateProperty.all(Colors.transparent),
+                ),
+                child: const Text("Upload Image from Gallery"),
+              ),
+            ),]
+          ),
             const SizedBox(
               height: 15,
             ),
@@ -82,8 +112,8 @@ class notificationRegs extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   gradient: const LinearGradient(colors: [
-                    Color.fromRGBO(143, 148, 251, 1),
-                    Color.fromRGBO(143, 148, 251, 2)
+                    Color.fromARGB(255, 0, 98, 255),
+                         Color.fromARGB(255, 0, 98, 255),
                   ])),
               child: ElevatedButton(
                 onPressed: (() {

@@ -50,6 +50,10 @@ class _complaintscreenState extends State<complaintscreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Column(
+                  
+                  
+                  children:[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -71,7 +75,10 @@ class _complaintscreenState extends State<complaintscreen> {
                             fontWeight: FontWeight.w300, fontSize: 13)),
                   ),
                 ),
+                ]
+                ),
                 Container(
+
                   child: Image.network(
                     '${ipaddress}${widget.complaintImgpath}',
                     errorBuilder: (context, error, stackTrace) {
@@ -79,7 +86,11 @@ class _complaintscreenState extends State<complaintscreen> {
                     },
                   ),
                 ),
+                Container(
+                  padding: EdgeInsets.all(15),
+                  child:
                 statusbar(states: int.parse(status)),
+                ),
                 Container(
                   height: 350,
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),

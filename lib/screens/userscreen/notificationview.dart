@@ -8,6 +8,7 @@ class notificationview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title:Text("Notifications")),
       backgroundColor: Color.fromARGB(31, 219, 112, 11),
         body: FutureBuilder<List<dynamic>>(
         

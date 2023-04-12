@@ -9,7 +9,9 @@ class compscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+     
       child: Scaffold(
+         appBar: AppBar(title:Text("Complaints")),
           body: FutureBuilder<List<dynamic>>(
             future: Future.value(complaints()),
             builder:

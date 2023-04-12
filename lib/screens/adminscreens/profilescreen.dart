@@ -1,9 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:eward_frontend/screens/userscreen/clipper_profile.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
 import 'package:eward_frontend/screens/authentication/loginscreen.dart';
-import 'package:eward_frontend/screens/userscreen/family_memb.dart';
-import 'package:eward_frontend/screens/memberscreen/requests.dart';
+import 'package:eward_frontend/screens/adminscreens/datashow.dart';
+
+
 
 class profile_screen extends StatelessWidget {
   const profile_screen({super.key});
@@ -18,14 +20,17 @@ class profile_screen extends StatelessWidget {
           child: Container(
             height: 80,
             decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/notification.png"),
+                ),
                 shape: BoxShape.circle,
                 color: Color.fromARGB(255, 210, 206, 206)),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(235, 125, 0, 0),
-          child: Container(
-            child: Text("",
+          padding: const EdgeInsets.fromLTRB(175, 125, 0, 0),
+          child:  Container(
+            child:const  Text("",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 50,
@@ -58,19 +63,21 @@ class profile_screen extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
                     height: 50,
                     width: 430,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color:const  Color.fromRGBO(143, 148, 251, 2),
+                      color: const Color.fromRGBO(143, 148, 251, 2),
                     ),
                     child: ElevatedButton(
                       onPressed: (() {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return const  MyWidget();
-                        }));
+                       
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    StaticDropDown()));
                       }),
                       style: ButtonStyle(
                         backgroundColor:
@@ -78,7 +85,9 @@ class profile_screen extends StatelessWidget {
                         shadowColor:
                             MaterialStateProperty.all(Colors.transparent),
                       ),
-                      child: const Text("Requests"),
+                      child: const Text(
+                        "Search Profile",
+                      ),
                     ),
                   ),
                   Container(
@@ -87,11 +96,16 @@ class profile_screen extends StatelessWidget {
                     width: 430,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color:const  Color.fromRGBO(143, 148, 251, 2),
+                      color: const Color.fromRGBO(143, 148, 251, 2),
                     ),
                     child: ElevatedButton(
                       onPressed: (() {
-                        signout(context);
+                        clear_cache();
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    loginscreen()));
                       }),
                       style: ButtonStyle(
                         backgroundColor:
@@ -104,6 +118,7 @@ class profile_screen extends StatelessWidget {
                       ),
                     ),
                   ),
+
                 ],
               )),
         )
@@ -111,17 +126,6 @@ class profile_screen extends StatelessWidget {
     );
   }
 
-  void signout(context) async {
-    Future<String> msg = Logout();
-    String result = await msg;
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: ((context) {
-      return loginscreen();
-    })));
+  
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      behavior: SnackBarBehavior.floating,
-      content: Text(result),
-    ));
-  }
 }

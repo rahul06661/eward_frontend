@@ -1,9 +1,16 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:eward_frontend/globals/globalvar.dart' as globals;
 
 String ipaddress = globals.ipaddress;
+
+Future<void> clear_cache() async
+{
+SharedPreferences preferences = await SharedPreferences.getInstance();
+await preferences.clear();
+}
 
 Future<Map<String, dynamic>> singinapi(username, password) async {
   var url = Uri.parse('${ipaddress}/auths/signin/');

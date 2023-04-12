@@ -1,8 +1,7 @@
 import 'package:eward_frontend/screens/authentication/splashscreen.dart';
 import 'package:flutter/material.dart';
-import 'package:eward_frontend/screens/authentication/loginscreen.dart';
-import 'package:eward_frontend/screens/userscreen/profilescreen.dart';
 
+import 'package:eward_frontend/screens/adminscreens/datashow.dart';
 
 void main() {
   runApp(MyWidget());

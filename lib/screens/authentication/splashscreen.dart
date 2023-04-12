@@ -84,7 +84,7 @@ class _MyWidgetState extends State<splash_screen> {
     await Future.delayed(Duration(milliseconds: 500));
     setState(() => animate = true);
     await Future.delayed(Duration(milliseconds: 3000));
-    Navigator.pushReplacement(context,
+    Navigator.pushReplacement( context,
         MaterialPageRoute(builder: (BuildContext context) => loginscreen()));
   }
 }

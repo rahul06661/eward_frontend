@@ -42,10 +42,11 @@ class MyCustomFormState extends State<userRegistration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("User Registeration")),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Material(
-            color: Colors.black,
+            
             child: Form(
               key: _formKey,
               child: Column(
@@ -57,7 +58,8 @@ class MyCustomFormState extends State<userRegistration> {
                     child: TextFormField(
                       controller: t1,
                       decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
+                        prefixIcon: Icon(Icons.email),
+                        border: OutlineInputBorder(),
                         labelText: 'Enter Email',
                       ),
                     ),
@@ -68,7 +70,8 @@ class MyCustomFormState extends State<userRegistration> {
                     child: TextFormField(
                       controller: t2,
                       decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
+                        prefixIcon: Icon(Icons.abc),
+                        border: OutlineInputBorder(),
                         labelText: 'Enter Firstname',
                       ),
                     ),
@@ -79,7 +82,8 @@ class MyCustomFormState extends State<userRegistration> {
                     child: TextFormField(
                       controller: t3,
                       decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
+                        prefixIcon: Icon(Icons.abc),
+                        border: OutlineInputBorder(),
                         labelText: 'Enter Lastname',
                       ),
                     ),
@@ -90,7 +94,8 @@ class MyCustomFormState extends State<userRegistration> {
                     child: TextFormField(
                       controller: t4,
                       decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
+                        prefixIcon: Icon(Icons.how_to_vote),
+                        border: OutlineInputBorder(),
                         labelText: 'Enter Voter_id',
                       ),
                     ),
@@ -100,24 +105,145 @@ class MyCustomFormState extends State<userRegistration> {
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: Container(
                         width: double.infinity,
-                        child: DropdownButton(
-                          isExpanded: true,
-                          hint: const Text(
-                            "Select job",
+                        child: InputDecorator(
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.work),
+                            contentPadding: EdgeInsets.all(4),
+                            border: OutlineInputBorder(),
                           ),
-                          value: selectedjob,
-                          items: jobs.map((String items) {
-                            return DropdownMenuItem(
-                              value: items,
-                              child: Text(items),
-                            );
-                          }).toList(),
-                          onChanged: ((value) {
-                            setState(() {
-                              selectedjob = value;
-                            });
-                          }),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton(
+                              isExpanded: true,
+                              hint: const Text(
+                                "Select job",
+                              ),
+                              value: selectedjob,
+                              items: jobs.map((String items) {
+                                return DropdownMenuItem(
+                                  value: items,
+                                  child: Text(items),
+                                );
+                              }).toList(),
+                              onChanged: ((value) {
+                                setState(() {
+                                  selectedjob = value;
+                                });
+                              }),
+                            ),
+                          ),
                         )),
+                  ),
+                  
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: TextFormField(
+                      controller: t5,
+                      decoration:const InputDecoration(
+                        prefixIcon: Icon(Icons.numbers),
+                        border: OutlineInputBorder(),
+                        labelText: 'Enter Age',
+                      ),
+                    ),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 16),
+                      child: Container(
+                        width: double.infinity,
+                        child: InputDecorator(
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.bloodtype),
+                            contentPadding: EdgeInsets.all(4),
+                            border: OutlineInputBorder(),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton(
+                              value: selectedbloodgroup,
+                              onChanged: ((value) {
+                                setState(() {
+                                  selectedbloodgroup = value;
+                                });
+                              }),
+                              isExpanded: true,
+                              hint: const Text("Blood group"),
+                              items: blood_group.map((String items) {
+                                return DropdownMenuItem(
+                                    value: items, child: Text(items));
+                              }).toList(),
+                            ),
+                          ),
+                        ),
+                      )),
+                  
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                    child: Container(
+                        width: double.infinity,
+                        child: InputDecorator(
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.cast_for_education),
+                            contentPadding: EdgeInsets.all(4),
+                            border: OutlineInputBorder(),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton(
+                              isExpanded: true,
+                              hint: const Text(
+                                "Select qualification",
+                              ),
+                              value: selectedqualification,
+                              items: qualification.map((String items) {
+                                return DropdownMenuItem(
+                                  value: items,
+                                  child: Text(items),
+                                );
+                              }).toList(),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  selectedqualification = newValue;
+                                });
+                              },
+                            ),
+                          ),
+                        )),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: TextFormField(
+                      controller: t6,
+                      decoration:  const InputDecoration(
+                        prefixIcon: Icon(Icons.phone),
+                        border: OutlineInputBorder(),
+                        labelText: 'Enter Phone Number',
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: TextFormField(
+                      controller: t7,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.numbers_outlined),
+                        border: OutlineInputBorder(),
+                        labelText: 'Enter Ward',
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: TextFormField(
+                      controller: t8,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.home_filled),
+                        border: OutlineInputBorder(),
+                        labelText: 'Enter Housenumber',
+                      ),
+                    ),
                   ),
                   Padding(
                       padding: const EdgeInsets.symmetric(
@@ -150,27 +276,17 @@ class MyCustomFormState extends State<userRegistration> {
                             ),
                           ),
                         ],
-                      )),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: t5,
-                      decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Enter Age',
+                      )
                       ),
-                    ),
-                  ),
-                  Padding(
+                      Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 16),
+                          horizontal: 8, vertical: 8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
                             child: RadioListTile(
-                              title: const Text('Male'),
+                              title: const Text('Male',),
                               value: 'male',
                               groupValue: selectedoption,
                               onChanged: ((value) {
@@ -206,92 +322,17 @@ class MyCustomFormState extends State<userRegistration> {
                           ),
                         ],
                       )),
-                  Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 16),
-                      child: Container(
-                        width: double.infinity,
-                        child: DropdownButton(
-                          value: selectedbloodgroup,
-                          onChanged: ((value) {
-                            setState(() {
-                              selectedbloodgroup = value;
-                            });
-                          }),
-                          isExpanded: true,
-                          hint: const Text("Blood group"),
-                          items: blood_group.map((String items) {
-                            return DropdownMenuItem(
-                                value: items, child: Text(items));
-                          }).toList(),
-                        ),
-                      )),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: Container(
-                      width: double.infinity,
-                      child: DropdownButton(
-                        isExpanded: true,
-                        hint: const Text(
-                          "Select qualification",
-                        ),
-                        value: selectedqualification,
-                        items: qualification.map((String items) {
-                          return DropdownMenuItem(
-                            value: items,
-                            child: Text(items),
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            selectedqualification = newValue;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
+                  
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
-                      controller: t6,
-                      decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Enter Phone Number',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: t7,
-                      decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Enter Ward',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: t8,
-                      decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Enter House Number',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
+                      obscureText: true,
                       controller: t9,
                       decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Password',
+                        prefixIcon: Icon(Icons.password),
+                        border: OutlineInputBorder(),
+                        labelText: 'Enter Password',
                       ),
                     ),
                   ),
@@ -299,10 +340,12 @@ class MyCustomFormState extends State<userRegistration> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
+                      obscureText: true,
                       controller: t10,
                       decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Reenter Password',
+                        prefixIcon: Icon(Icons.password),
+                        border: OutlineInputBorder(),
+                        labelText: 'ReEnter Password',
                       ),
                     ),
                   ),
@@ -314,8 +357,8 @@ class MyCustomFormState extends State<userRegistration> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             gradient: const LinearGradient(colors: [
-                              Color.fromRGBO(143, 148, 251, 1),
-                              Color.fromRGBO(143, 148, 251, 2)
+                             Color.fromARGB(255, 0, 98, 255),
+                              Color.fromARGB(255, 0, 98, 255),
                             ])),
                         child: ElevatedButton(
                           onPressed: (() async {
