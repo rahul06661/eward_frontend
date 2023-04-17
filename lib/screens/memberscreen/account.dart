@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:eward_frontend/screens/userscreen/clipper_profile.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
 import 'package:eward_frontend/screens/authentication/loginscreen.dart';
-import 'package:eward_frontend/screens/userscreen/family_memb.dart';
 import 'package:eward_frontend/screens/memberscreen/requests.dart';
+import 'package:eward_frontend/screens/memberscreen/datashow.dart';
 
 class profile_screen extends StatelessWidget {
   const profile_screen({super.key});
@@ -35,16 +35,16 @@ class profile_screen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 320, 0, 0),
           child: Container(
-              height: 250,
+              height: 350,
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.all(10),
+                    margin:const EdgeInsets.all(10),
                     height: 50,
                     width: 430,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Color.fromRGBO(143, 148, 251, 2),
+                      color:const Color.fromRGBO(143, 148, 251, 2),
                     ),
                     child: ElevatedButton(
                       onPressed: (() {}),
@@ -58,7 +58,7 @@ class profile_screen extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.all(10),
+                    margin:const EdgeInsets.all(10),
                     height: 50,
                     width: 430,
                     decoration: BoxDecoration(
@@ -79,6 +79,34 @@ class profile_screen extends StatelessWidget {
                             MaterialStateProperty.all(Colors.transparent),
                       ),
                       child: const Text("Requests"),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.all(10),
+                    height: 50,
+                    width: 430,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color.fromRGBO(143, 148, 251, 2),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: (() {
+                       
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    StaticDropDown()));
+                      }),
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                        shadowColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                      ),
+                      child: const Text(
+                        "Search Profile",
+                      ),
                     ),
                   ),
                   Container(

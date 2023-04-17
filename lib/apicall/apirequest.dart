@@ -6,10 +6,9 @@ import 'package:eward_frontend/globals/globalvar.dart' as globals;
 
 String ipaddress = globals.ipaddress;
 
-Future<void> clear_cache() async
-{
-SharedPreferences preferences = await SharedPreferences.getInstance();
-await preferences.clear();
+Future<void> clear_cache() async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  await preferences.clear();
 }
 
 Future<Map<String, dynamic>> singinapi(username, password) async {
@@ -126,6 +125,51 @@ Future<List<dynamic>> getmembers() async {
   }
 }
 
+Future<dynamic> getcompstaus() async {
+  final sharedpref = await SharedPreferences.getInstance();
+  String token = sharedpref.getString('token') as String;
+  var url = Uri.parse('${ipaddress}/funs/compstatus/');
+  var request = http.MultipartRequest('POST', url);
+  request.fields['token'] = token;
+  request.headers['Content-Type'] = 'multipart/form-data';
+  var response = await request.send();
+  if (response.statusCode == 200) {
+    var jsonresp = await response.stream.bytesToString();
+    final jsonresps = jsonDecode(jsonresp);
+    return jsonresps['status'];
+  }
+}
+
+Future<List<dynamic>> profile(selecteddata, selecteditem) async {
+  print(selecteddata);
+  print(selecteditem);
+  if (selecteddata != '' && selecteditem != '') {
+    final sharedpref = await SharedPreferences.getInstance();
+    String usermail = sharedpref.getString('email') as String;
+    var url = Uri.parse('${ipaddress}/funs/analysis/');
+    var request = http.MultipartRequest('POST', url);
+    request.fields['selectedData'] = selecteddata;
+    request.fields['selectedItem'] = selecteditem;
+    request.fields['user'] = usermail;
+    request.headers['Content-Type'] = 'multipart/form-data';
+    var response = await request.send();
+    print(response);
+    if (response.statusCode == 200) {
+      var jsonresp = await response.stream.bytesToString();
+      final jsonresps = jsonDecode(jsonresp);
+      if (jsonresps['msg'] == 'sucess') {
+        return jsonresps['data'];
+      } else {
+        return ["requst not completed"];
+      }
+    } else {
+      return ["requst not completed"];
+    }
+  } else {
+    return [];
+  }
+}
+
 Future<List<dynamic>> complaints() async {
   final sharedpref = await SharedPreferences.getInstance();
   String token = sharedpref.getString('token') as String;
@@ -160,7 +204,6 @@ Future<List<dynamic>> get_chat(compId) async {
     var jsonresp = await response.stream.bytesToString();
     final jsonresps = jsonDecode(jsonresp);
     if (jsonresps['msg'] == 'sucess') {
-      
       return jsonresps['messages'];
     } else {
       return ["requst not completed"];
@@ -245,7 +288,7 @@ Future<String> memberRegistration(Map memb_obj) async {
     print("______________________________________________");
     return jsonresponse['msg'];
   } else {
-    return "FamilyMemberRegistration Not Sucessful";
+    return "Registration Not Sucessful";
   }
 }
 

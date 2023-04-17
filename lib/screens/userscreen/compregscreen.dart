@@ -54,7 +54,7 @@ class compregscreens extends StatelessWidget {
                 Container(
                   height: 50,
                   width: 150,
-                  decoration: BoxDecoration(
+                  decoration: BoxDecoration (
                       borderRadius: BorderRadius.circular(5),
                       gradient: const LinearGradient(colors: [
                          Color.fromARGB(255, 0, 98, 255),

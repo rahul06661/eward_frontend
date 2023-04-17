@@ -97,6 +97,7 @@ class loginscreen extends StatelessWidget {
                               width: 400,
                               padding: const EdgeInsets.all(8.0),
                               child: TextField(
+                                obscureText: true,
                                 style: const TextStyle(
                                     color: Color.fromARGB(255, 71, 63, 65)),
                                 controller: t2,

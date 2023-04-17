@@ -24,7 +24,7 @@ class notificationscreen extends StatelessWidget {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
-            color: Color.fromARGB(223, 205, 208, 227),
+          
             padding: EdgeInsets.fromLTRB(15, 15, 15, 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

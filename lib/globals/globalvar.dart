@@ -9,8 +9,10 @@ library globals;
 
 //String ipaddress="http://192.168.186.229:8000";
 
-String ipaddress = "http://192.168.161.229:8000";
+//String ipaddress = "http://192.168.161.229:8000";
 
+//String ipaddress = "http://192.168.214.229:8000";
 
+//String ipaddress = "http://192.168.210.229:8000";
 
-
+String ipaddress = "http://3.27.147.102:8000";

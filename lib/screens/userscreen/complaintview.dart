@@ -17,6 +17,10 @@ class compscreen extends StatelessWidget {
             builder:
                 ((BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
               if (snapshot.hasData) {
+                if (snapshot.data?.length == 0) {
+            
+            return Center(child: Text("No Complaints"));
+          }
                 final data = snapshot.data;
                 return ListView.builder(
                     itemCount: data?.length ?? 0,
@@ -31,6 +35,7 @@ class compscreen extends StatelessWidget {
                       String complaint_status = user['status'];
 
                       return Card(
+                        color:Color.fromARGB(0, 27, 7, 250) ,
                           elevation: 0,
                           child: SizedBox(
                             height: 100,

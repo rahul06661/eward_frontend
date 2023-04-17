@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:eward_frontend/screens/memberscreen/profileshow.dart';
 
 class StaticDropDown extends StatefulWidget {
   @override
@@ -6,8 +7,8 @@ class StaticDropDown extends StatefulWidget {
 }
 
 class _StaticDropDownState extends State<StaticDropDown> {
-  List<String> data = ['Jobs', 'Blood_Group', 'Qualification', 'Age'];
-  List<String> Jobs = [
+  List<String> data = ['Job', 'Blood_Group', 'Qualification', 'Age'];
+  List<String> Job = [
     'Goverment ',
     'Doctor',
     'Nurse',
@@ -33,13 +34,14 @@ class _StaticDropDownState extends State<StaticDropDown> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Static Multi Level Dropdown'),
+        title: const Text('Select Attributes'),
       ),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: [
           // Country Dropdown
-          DropdownButton<String>(
+          DropdownButton(
+            
             hint: const Text('Select parameter'),
             value: selectedData,
             isExpanded: true,
@@ -50,8 +52,8 @@ class _StaticDropDownState extends State<StaticDropDown> {
               );
             }).toList(),
             onChanged: (values) {
-              if (values == 'Jobs') {
-                items = Jobs;
+              if (values == 'Job') {
+                items = Job;
               } else if (values == 'Blood_Group') {
                 items = Blood_Group;
               } else if (values == 'Qualification') {
@@ -76,7 +78,7 @@ class _StaticDropDownState extends State<StaticDropDown> {
                     controller: t2,
                     decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
-                      labelText: 'Enter Firstname',
+                      labelText: '15-30',
                     ),
                   ),
                 )
@@ -107,11 +109,16 @@ class _StaticDropDownState extends State<StaticDropDown> {
             ),
             child: ElevatedButton(
               onPressed: (() {
-                
-                Navigator.pushReplacement(
+                if (t2.text != '') {
+                  selectedItems = t2.text;
+                  t2.clear();
+                }
+                Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => StaticDropDown()));
+                        builder: (BuildContext context) => profileShows(
+                            selectedData: selectedData,
+                            selectedItems: selectedItems)));
               }),
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.transparent),
@@ -122,7 +129,6 @@ class _StaticDropDownState extends State<StaticDropDown> {
               ),
             ),
           ),
-          // Province Dropdown Ends here
         ],
       ),
     );

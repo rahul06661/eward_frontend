@@ -14,6 +14,10 @@ class notificationview extends StatelessWidget {
         
       future: Future.value(notification()),
       builder: ((BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+        if (snapshot.data?.length == 0) {
+            
+            return Center(child: Text("No Notifications"));
+          }
         if (snapshot.hasData) {
           final data = snapshot.data;
           return ListView.builder(

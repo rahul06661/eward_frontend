@@ -42,10 +42,28 @@ class _MyWidgetState extends State<splash_screen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("E WARD",
-                          style: Theme.of(context).textTheme.headline3),
-                      Text(".../ A Digital Step",
-                          style: Theme.of(context).textTheme.headline4)
+                      Text(
+      'E-WARD',
+      style: TextStyle(
+        fontSize: 60,
+        
+        foreground: Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2
+          ..color = Colors.black,
+      ),
+    ),
+    Text(
+      ".../ A Digital Step",
+      style: TextStyle(
+        fontSize: 30,
+        foreground: Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2
+          ..color = Colors.blue[400]!,
+      ),
+    ),
+                     
                     ],
                   ),
                 )),

@@ -50,35 +50,30 @@ class _complaintscreenState extends State<complaintscreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Column(
-                  
-                  
-                  children:[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(widget.complaintTitle as String,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 18)),
-                    Text(widget.complaintUpdated as String,
-                        style: const TextStyle(
-                            fontStyle: FontStyle.italic, fontSize: 14))
-                  ],
-                ),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 30),
-                  alignment: Alignment.topLeft,
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(widget.complaintDesc as String,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w300, fontSize: 13)),
+                Column(children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(widget.complaintTitle as String,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w400, fontSize: 18)),
+                      Text(widget.complaintUpdated as String,
+                          style: const TextStyle(
+                              fontStyle: FontStyle.italic, fontSize: 14))
+                    ],
                   ),
-                ),
-                ]
-                ),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 30),
+                    alignment: Alignment.topLeft,
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(widget.complaintDesc as String,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w300, fontSize: 13)),
+                    ),
+                  ),
+                ]),
                 Container(
-
                   child: Image.network(
                     '${ipaddress}${widget.complaintImgpath}',
                     errorBuilder: (context, error, stackTrace) {
@@ -88,13 +83,12 @@ class _complaintscreenState extends State<complaintscreen> {
                 ),
                 Container(
                   padding: EdgeInsets.all(15),
-                  child:
-                statusbar(states: int.parse(status)),
+                  child: statusbar(states: int.parse(status)),
                 ),
                 Container(
                   height: 350,
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  decoration: BoxDecoration(border: Border.all(width: 1)),
+                  
                   child: Container(
                     child: MyWidget(id: widget.complaintId),
                   ),
@@ -115,10 +109,12 @@ class _complaintscreenState extends State<complaintscreen> {
                 int.parse(status) != 3
                     ? Container(
                         height: 50,
-                        width: 430,
+                        width: 100,
                         child: ElevatedButton(
                             onPressed: (() {
+                              
                               updatecomplaint(context);
+                              t1.clear();
                             }),
                             style: ButtonStyle(
                               backgroundColor:

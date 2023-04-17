@@ -1,10 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:eward_frontend/screens/userscreen/clipper_profile.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
 import 'package:eward_frontend/screens/authentication/loginscreen.dart';
 import 'package:eward_frontend/screens/userscreen/family_memb.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:eward_frontend/screens/userscreen/complaintStatu.dart';
 
 class profile_screen extends StatelessWidget {
   const profile_screen({super.key});
@@ -19,11 +19,9 @@ class profile_screen extends StatelessWidget {
           child: Container(
             height: 80,
             decoration: const BoxDecoration(
-              image:  DecorationImage(
-      image: AssetImage("assets/images/notification.png"),
-     
-    ),
-              
+                image: DecorationImage(
+                  image: AssetImage("assets/images/notification.png"),
+                ),
                 shape: BoxShape.circle,
                 color: Color.fromARGB(255, 210, 206, 206)),
           ),
@@ -31,7 +29,7 @@ class profile_screen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(175, 125, 0, 0),
           child: Container(
-            child: Text("" ,
+            child: Text("",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 50,
@@ -41,7 +39,7 @@ class profile_screen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 320, 0, 0),
           child: Container(
-              height: 250,
+              height: 300,
               child: Column(
                 children: [
                   Container(
@@ -85,6 +83,36 @@ class profile_screen extends StatelessWidget {
                             MaterialStateProperty.all(Colors.transparent),
                       ),
                       child: const Text("Add Family Members"),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    height: 50,
+                    width: 430,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color.fromRGBO(143, 148, 251, 2),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: (() async{
+                        
+                       dynamic data =
+                            await getcompstaus() ;
+                            
+                            Map<String, String> myMap = Map<String, String>.from(data);
+                            print(myMap);
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return complaintStatus(open: myMap['opencomp'],pending:myMap['pendingcomp'],close:myMap['closedcomp'],);
+                        }));
+                      }),
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                        shadowColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                      ),
+                      child: const Text("Complaints Status"),
                     ),
                   ),
                   Container(

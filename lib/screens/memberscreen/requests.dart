@@ -17,8 +17,10 @@ class _MyWidgetState extends State<MyWidget> {
       future: Future.value(notapproved()),
       builder: ((BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.hasData) {
-          if (snapshot.data?.isEmpty == null) {
-            return Text("No Requets Pending");
+          
+          if (snapshot.data?.length == 0) {
+            
+            return Center(child: Text("No Requets Pending"));
           }
           final data = snapshot.data;
           return ListView.builder(

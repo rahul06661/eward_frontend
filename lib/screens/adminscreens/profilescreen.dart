@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:eward_frontend/screens/userscreen/clipper_profile.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
 import 'package:eward_frontend/screens/authentication/loginscreen.dart';
-import 'package:eward_frontend/screens/adminscreens/datashow.dart';
+
 
 
 
@@ -62,34 +62,7 @@ class profile_screen extends StatelessWidget {
                       child: const Text("Profile"),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    height: 50,
-                    width: 430,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: const Color.fromRGBO(143, 148, 251, 2),
-                    ),
-                    child: ElevatedButton(
-                      onPressed: (() {
-                       
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    StaticDropDown()));
-                      }),
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                        shadowColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                      ),
-                      child: const Text(
-                        "Search Profile",
-                      ),
-                    ),
-                  ),
+                  
                   Container(
                     margin: const EdgeInsets.all(10),
                     height: 50,

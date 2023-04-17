@@ -16,6 +16,10 @@ class compscreen extends StatelessWidget {
               ((BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
             if (snapshot.hasData) {
               final data = snapshot.data;
+               if (snapshot.data?.length == 0) {
+            
+            return Center(child: Text("No Complaints"));
+          }
               return ListView.builder(
                   itemCount: data?.length ?? 0,
                   itemBuilder: ((BuildContext context, int index) {
@@ -28,6 +32,7 @@ class compscreen extends StatelessWidget {
                     String complaint_imgpath = user['img_path'];
                     String complaint_status = user['status'];
                     return Card(
+                      
                         elevation: 0,
                         child: SizedBox(
                           height: 100,

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
 import 'package:eward_frontend/screens/adminscreens/adminhomepage.dart';
+import 'package:eward_frontend/screens/adminscreens/adminnav.dart';
 
 class memberReg extends StatefulWidget {
   memberReg({super.key});
 
   @override
-  State<memberReg> createState() => _memberRegState();
+  State<memberReg> createState() =>  _memberRegState();
 }
 
 class _memberRegState extends State<memberReg> {
@@ -113,8 +114,8 @@ class _memberRegState extends State<memberReg> {
                         ],
                       )),
                   Padding(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 16),
                       child: Container(
                         width: double.infinity,
                         child: DropdownButton(
@@ -187,12 +188,13 @@ class _memberRegState extends State<memberReg> {
                             membermap['ward'] = t6.text;
                             membermap['phone'] = t5.text;
                             membermap['blood_group'] = selectedbloodgroup;
-                            String response = await memberRegistration(membermap);
+                            String response =
+                                await memberRegistration(membermap);
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(builder: ((contex) {
-                              return adminHomeScreen();
+                              return adminhomenav();
                             })));
-    
+
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               behavior: SnackBarBehavior.floating,
                               content: Text(response),
