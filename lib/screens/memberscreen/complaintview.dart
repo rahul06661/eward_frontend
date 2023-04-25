@@ -10,6 +10,8 @@ class compscreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(title:Text("Complaints")),
+        
         body: FutureBuilder<List<dynamic>>(
           future: Future.value(complaints()),
           builder:
@@ -38,7 +40,7 @@ class compscreen extends StatelessWidget {
                           height: 100,
                           child: ListTile(
                             leading:
-                                Image.asset("assets/images/notification.png"),
+                                Image.asset("assets/images/icons8-complaint-100.png"),
                             title: Text(complaint_title),
                             subtitle: Text(complaint_desc,
                                 overflow: TextOverflow.ellipsis),

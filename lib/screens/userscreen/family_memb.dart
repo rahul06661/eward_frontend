@@ -257,53 +257,7 @@ class MyCustomFormState extends State<famMemberReg> {
                       ),
                     ),
                   ),
-                  Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: RadioListTile(
-                              title: const Text('Male',
-                                  style: TextStyle(fontSize: 15)),
-                              value: 'male',
-                              groupValue: selectedoption,
-                              onChanged: ((value) {
-                                setState(() {
-                                  selectedoption = value;
-                                });
-                              }),
-                            ),
-                          ),
-                          Expanded(
-                            child: RadioListTile(
-                              title: const Text('Female',
-                                  style: TextStyle(fontSize: 15)),
-                              value: 'female',
-                              groupValue: selectedoption,
-                              onChanged: ((value) {
-                                setState(() {
-                                  selectedoption = value;
-                                });
-                              }),
-                            ),
-                          ),
-                          Expanded(
-                            child: RadioListTile(
-                              title: const Text('Others',
-                                  style: TextStyle(fontSize: 15)),
-                              value: 'others',
-                              groupValue: selectedoption,
-                              onChanged: ((value) {
-                                setState(() {
-                                  selectedoption = value;
-                                });
-                              }),
-                            ),
-                          ),
-                        ],
-                      )),
+                  
                   Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 16),
@@ -355,7 +309,7 @@ class MyCustomFormState extends State<famMemberReg> {
                             familymap['lastname'] = t3.text;
                             familymap['voter_id'] = t4.text;
                             familymap['tax_payer'] = select_tax;
-                            familymap['gender'] = selectedoption;
+                            familymap['gender'] = " ";
                             familymap['age'] = t5.text;
                             familymap['job'] = selectedjob;
                             familymap['qualification'] = selectedqualification;

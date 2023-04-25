@@ -15,15 +15,17 @@ class profile_screen extends StatelessWidget {
       children: [
         const clipper_prof(),
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 110, 0, 0),
+          padding: const EdgeInsets.fromLTRB(158, 108, 0, 0),
           child: Container(
             height: 80,
             decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/notification.png"),
-                ),
                 shape: BoxShape.circle,
-                color: Color.fromARGB(255, 210, 206, 206)),
+                color: Color.fromARGB(255, 210, 206, 206),
+               
+                ),
+                child:Image.asset("assets/images/icons8-user-58.png")
+                
+                
           ),
         ),
         Padding(

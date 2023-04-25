@@ -37,7 +37,7 @@ class profileShows extends StatelessWidget {
                         height: 100,
                         child: ListTile(
                           leading:
-                              Image.asset("assets/images/notification.png"),
+                              Image.asset("assets/images/icons8-profile-50.png"),
                           title: Text(firstname),
                           trailing: Text(phone),
                           subtitle: Text(email),

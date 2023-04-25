@@ -41,7 +41,7 @@ class compscreen extends StatelessWidget {
                             height: 100,
                             child: ListTile(
                               leading:
-                                  Image.asset("assets/images/notification.png"),
+                                  Image.asset("assets/images/icons8-complaint-100.png"),
                               title: Text(complaint_title),
                               subtitle: Text(complaint_desc,
                                   overflow: TextOverflow.ellipsis),

@@ -9,6 +9,7 @@ class notificationview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title:Text("Notifications")),
       body: FutureBuilder<List<dynamic>>(
         future: Future.value(notification()),
         builder:
