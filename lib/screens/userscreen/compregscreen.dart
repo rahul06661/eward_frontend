@@ -72,7 +72,7 @@ class compregscreens extends StatelessWidget {
                       shadowColor:
                           MaterialStateProperty.all(Colors.transparent),
                     ),
-                    child: const Text("Upload from Gallery"),
+                    child: const Text("Gallery"),
                   ),
                 ),
                 Container(
@@ -98,7 +98,7 @@ class compregscreens extends StatelessWidget {
                       shadowColor:
                           MaterialStateProperty.all(Colors.transparent),
                     ),
-                    child: const Text("Upload from Image"),
+                    child: const Text("Camera"),
                   ),
                 ),
               ],

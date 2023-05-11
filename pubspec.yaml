@@ -45,6 +45,8 @@ dependencies:
   vertical_stepper: ^0.0.1
   timelines: ^0.1.0
   flutter_form_builder: ^7.7.0
+  internet_connection_checker: ^1.0.0+1
+  connectivity_plus: ^0.0.1
   
 
 dev_dependencies:

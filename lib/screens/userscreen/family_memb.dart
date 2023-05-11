@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
 import 'package:eward_frontend/screens/userscreen/profilescreen.dart';
-
+import 'package:eward_frontend/screens/userscreen/familyview.dart';
 class famMemberReg extends StatefulWidget {
   const famMemberReg({super.key});
 
@@ -320,7 +320,7 @@ class MyCustomFormState extends State<famMemberReg> {
                                 await familyMemberRegistration(familymap);
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(builder: (context) {
-                              return const profile_screen();
+                              return  familyview();
                             }));
 
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(

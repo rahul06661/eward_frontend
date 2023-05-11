@@ -122,7 +122,7 @@ class _complaintscreenState extends State<complaintscreen> {
                               shadowColor:
                                   MaterialStateProperty.all(Colors.transparent),
                             ),
-                            child: Image.asset("assets/images/arrow.png")),
+                            child: const Text("Update Remark"),),
                       )
                     : const Text(" "),
                 Container(

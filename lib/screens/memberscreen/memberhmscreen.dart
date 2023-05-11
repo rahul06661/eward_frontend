@@ -12,7 +12,7 @@ class membhomescreen extends StatefulWidget {
 
 class _userhomescreenState extends State<membhomescreen> {
   int current_st = 0;
-  final pages = const [notificationview(), compscreen(), profile_screen()];
+  final pages =  [notificationview(), compscreen(), profile_screen()];
   @override
   
 

@@ -46,7 +46,6 @@ class MyCustomFormState extends State<userRegistration> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Material(
-            
             child: Form(
               key: _formKey,
               child: Column(
@@ -56,6 +55,12 @@ class MyCustomFormState extends State<userRegistration> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Enter vaild email';
+                        }
+                        return null;
+                      },
                       controller: t1,
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.email),
@@ -68,6 +73,12 @@ class MyCustomFormState extends State<userRegistration> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Firstname required';
+                        }
+                        return null;
+                      },
                       controller: t2,
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.abc),
@@ -80,6 +91,12 @@ class MyCustomFormState extends State<userRegistration> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Lastname required';
+                        }
+                        return null;
+                      },
                       controller: t3,
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.abc),
@@ -92,6 +109,12 @@ class MyCustomFormState extends State<userRegistration> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Voter ID required';
+                        }
+                        return null;
+                      },
                       controller: t4,
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.how_to_vote),
@@ -133,13 +156,18 @@ class MyCustomFormState extends State<userRegistration> {
                           ),
                         )),
                   ),
-                  
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Age Required';
+                        }
+                        return null;
+                      },
                       controller: t5,
-                      decoration:const InputDecoration(
+                      decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.numbers),
                         border: OutlineInputBorder(),
                         labelText: 'Enter Age',
@@ -175,7 +203,6 @@ class MyCustomFormState extends State<userRegistration> {
                           ),
                         ),
                       )),
-                  
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
@@ -213,8 +240,14 @@ class MyCustomFormState extends State<userRegistration> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Phone Number required';
+                        }
+                        return null;
+                      },
                       controller: t6,
-                      decoration:  const InputDecoration(
+                      decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.phone),
                         border: OutlineInputBorder(),
                         labelText: 'Enter Phone Number',
@@ -225,6 +258,12 @@ class MyCustomFormState extends State<userRegistration> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Ward number required';
+                        }
+                        return null;
+                      },
                       controller: t7,
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.numbers_outlined),
@@ -237,6 +276,12 @@ class MyCustomFormState extends State<userRegistration> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'House Number required';
+                        }
+                        return null;
+                      },
                       controller: t8,
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.home_filled),
@@ -276,9 +321,8 @@ class MyCustomFormState extends State<userRegistration> {
                             ),
                           ),
                         ],
-                      )
-                      ),
-                      Padding(
+                      )),
+                  Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 8),
                       child: Row(
@@ -286,7 +330,9 @@ class MyCustomFormState extends State<userRegistration> {
                         children: [
                           Expanded(
                             child: RadioListTile(
-                              title: const Text('Male',),
+                              title: const Text(
+                                'Male',
+                              ),
                               value: 'male',
                               groupValue: selectedoption,
                               onChanged: ((value) {
@@ -322,11 +368,16 @@ class MyCustomFormState extends State<userRegistration> {
                           ),
                         ],
                       )),
-                  
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Password required';
+                        }
+                        return null;
+                      },
                       obscureText: true,
                       controller: t9,
                       decoration: const InputDecoration(
@@ -340,6 +391,12 @@ class MyCustomFormState extends State<userRegistration> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Required';
+                        }
+                        return null;
+                      },
                       obscureText: true,
                       controller: t10,
                       decoration: const InputDecoration(
@@ -357,7 +414,7 @@ class MyCustomFormState extends State<userRegistration> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             gradient: const LinearGradient(colors: [
-                             Color.fromARGB(255, 0, 98, 255),
+                              Color.fromARGB(255, 0, 98, 255),
                               Color.fromARGB(255, 0, 98, 255),
                             ])),
                         child: ElevatedButton(
@@ -377,12 +434,23 @@ class MyCustomFormState extends State<userRegistration> {
                             usermap['housenumber'] = t8.text;
                             usermap['password'] = t9.text;
                             usermap['qualification'] = selectedqualification;
+                            String password1, password2, response = " ";
+                            password1 = t9.text;
+                            password2 = t10.text;
 
-                            String response = await userRegistrations(usermap);
-                            Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: (context) {
-                              return loginscreen();
-                            }));
+                            if (_formKey.currentState!.validate()) {
+                              if (password1 == password2) {
+                                response = await userRegistrations(usermap);
+                                Navigator.pushReplacement(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return loginscreen();
+                                }));
+                              } else {
+                                response = "Password  Mismatch";
+                              }
+                            } else {
+                              response = "Invaild data";
+                            }
 
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 behavior: SnackBarBehavior.floating,

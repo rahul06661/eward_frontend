@@ -2,12 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:eward_frontend/screens/userscreen/clipper_profile.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
 import 'package:eward_frontend/screens/authentication/loginscreen.dart';
-import 'package:eward_frontend/screens/userscreen/family_memb.dart';
+import 'package:eward_frontend/screens/userscreen/familyview.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:eward_frontend/screens/userscreen/complaintStatu.dart';
 
-class profile_screen extends StatelessWidget {
-  const profile_screen({super.key});
+
+
+class profile_screen extends StatefulWidget {
+  profile_screen({super.key});
+
+  @override
+  State<profile_screen> createState() => _profile_screenState();
+}
+
+class _profile_screenState extends State<profile_screen> {
+  String user1 = '';
+
+  String email1 = '';
+
+  Future<dynamic> get_data() async {
+    final sharedpref = await SharedPreferences.getInstance();
+    String user = sharedpref.getString('utype') as String;
+    String email = sharedpref.getString('email') as String;
+    setState(() {
+      user1 = user;
+      email1 = email;
+    });
+    return [user, email];
+  }
+
+  @override
+  void initState() {
+    get_data();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,27 +44,31 @@ class profile_screen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(158, 108, 0, 0),
           child: Container(
-            height: 80,
-            decoration: const BoxDecoration(
+              height: 80,
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Color.fromARGB(255, 210, 206, 206),
-               
-                ),
-                child:Image.asset("assets/images/icons8-user-58.png")
-                
-                
-          ),
+              ),
+              child: Image.asset("assets/images/icons8-user-58.png")),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(175, 125, 0, 0),
-          child: Container(
-            child: Text("",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 50,
-                    fontWeight: FontWeight.w900)),
-          ),
-        ),
+            padding: const EdgeInsets.fromLTRB(220, 200, 20, 0),
+            child: Container(
+              child: Column(
+                children: [
+                  Text("Loggined as : ",
+                      style: TextStyle(
+                          color: const Color.fromRGBO(143, 148, 251, 2),
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700)),
+                  Text('  $email1',
+                      style: TextStyle(
+                          color: const Color.fromRGBO(143, 148, 251, 2),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500))
+                ],
+              ),
+            )),
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 320, 0, 0),
           child: Container(
@@ -75,7 +106,7 @@ class profile_screen extends StatelessWidget {
                       onPressed: (() {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return const famMemberReg();
+                          return const familyview();
                         }));
                       }),
                       style: ButtonStyle(
@@ -84,7 +115,7 @@ class profile_screen extends StatelessWidget {
                         shadowColor:
                             MaterialStateProperty.all(Colors.transparent),
                       ),
-                      child: const Text("Add Family Members"),
+                      child: const Text("Family Members"),
                     ),
                   ),
                   Container(
@@ -96,16 +127,19 @@ class profile_screen extends StatelessWidget {
                       color: const Color.fromRGBO(143, 148, 251, 2),
                     ),
                     child: ElevatedButton(
-                      onPressed: (() async{
-                        
-                       dynamic data =
-                            await getcompstaus() ;
-                            
-                            Map<String, String> myMap = Map<String, String>.from(data);
-                            print(myMap);
+                      onPressed: (() async {
+                        dynamic data = await getcompstaus();
+
+                        Map<String, String> myMap =
+                            Map<String, String>.from(data);
+                        print(myMap);
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return complaintStatus(open: myMap['opencomp'],pending:myMap['pendingcomp'],close:myMap['closedcomp'],);
+                          return complaintStatus(
+                            open: myMap['opencomp'],
+                            pending: myMap['pendingcomp'],
+                            close: myMap['closedcomp'],
+                          );
                         }));
                       }),
                       style: ButtonStyle(
@@ -145,14 +179,6 @@ class profile_screen extends StatelessWidget {
         )
       ],
     );
-  }
-
-  Future<String> getchar() async {
-    final sharepref = await SharedPreferences.getInstance();
-    String name = sharepref.getString('email').toString();
-    print(name);
-
-    return name[0];
   }
 
   void signout(context) async {

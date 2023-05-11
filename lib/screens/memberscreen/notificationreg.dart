@@ -75,7 +75,7 @@ class notificationRegs extends StatelessWidget {
                       MaterialStateProperty.all(Colors.transparent),
                   shadowColor: MaterialStateProperty.all(Colors.transparent),
                 ),
-                child: const Text("Upload Image from Camera"),
+                child: const Text("Camera"),
               ),
             ),
 
@@ -99,7 +99,7 @@ class notificationRegs extends StatelessWidget {
                       MaterialStateProperty.all(Colors.transparent),
                   shadowColor: MaterialStateProperty.all(Colors.transparent),
                 ),
-                child: const Text("Upload Image from Gallery"),
+                child: const Text("Gallery"),
               ),
             ),]
           ),

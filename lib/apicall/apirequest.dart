@@ -4,7 +4,19 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:eward_frontend/globals/globalvar.dart' as globals;
 
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+
 String ipaddress = globals.ipaddress;
+
+Future<bool> check_internet() async {
+  bool isDeviceConnected = true;
+  try {
+    isDeviceConnected = await InternetConnectionChecker().hasConnection;
+    return isDeviceConnected;
+  } on Exception catch (e) {
+    return isDeviceConnected;
+  }
+}
 
 Future<void> clear_cache() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -12,19 +24,25 @@ Future<void> clear_cache() async {
 }
 
 Future<Map<String, dynamic>> singinapi(username, password) async {
+  bool isDeviceConnected = await check_internet();
+
   var url = Uri.parse('${ipaddress}/auths/signin/');
   var request = http.MultipartRequest('POST', url);
   request.fields['email'] = username;
   request.fields['password'] = password;
   request.headers['Content-Type'] = 'multipart/form-data';
-  var response = await request.send();
-  if (response.statusCode == 200) {
-    var jsonresp = await response.stream.bytesToString();
-    var jsonresps = jsonDecode(jsonresp);
-    return jsonresps;
-  } else {
-    return {"error": "requst not completed"};
+  try {
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      var jsonresp = await response.stream.bytesToString();
+      var jsonresps = jsonDecode(jsonresp);
+      return jsonresps;
+    }
+  } on Exception catch (e) {
+    return {"error": "Check Internet Connection"};
   }
+
+  return {"error": "requst not completed"};
 }
 
 void approval(String email) async {
@@ -53,6 +71,31 @@ Future<String> updateRemark(remark, idss) async {
     return jsonresps['msg'];
   } else {
     return "error occoured ";
+  }
+}
+
+Future<List<dynamic>> getfamilymembers() async {
+  final sharedpref = await SharedPreferences.getInstance();
+  String email = sharedpref.getString('email') as String;
+  var url = Uri.parse('${ipaddress}/funs/getfamily/');
+  var request = http.MultipartRequest('POST', url);
+  request.fields['email'] = email;
+  request.headers['Content-type'] = 'multipart/form-data';
+  var response = await request.send();
+  if (response.statusCode == 200) {
+    print(
+        "_____________________________________________________________________");
+    print(response);
+    var jsonresp = await response.stream.bytesToString();
+    final jsonresps = jsonDecode(jsonresp);
+    if (jsonresps['msg'] == 'Sucess') {
+      print(jsonresps['wards']);
+      return jsonresps['wards'];
+    } else {
+      return ["requst not completed"];
+    }
+  } else {
+    return ["requst not completed"];
   }
 }
 
@@ -260,8 +303,8 @@ Future<String> Logout() async {
   if (response.statusCode == 200) {
     var jsonresp = await response.stream.bytesToString();
     final jsonresponse = jsonDecode(jsonresp);
-    if (jsonresponse['msg'] == 'sucess') {
-      return "Logout sucessful";
+    if (jsonresponse['msg'] == 'success') {
+      return "Logout successful";
     } else {
       return "Invaild user";
     }
@@ -285,10 +328,9 @@ Future<String> memberRegistration(Map memb_obj) async {
     var jsonresp = await response.stream.bytesToString();
     final jsonresponse = jsonDecode(jsonresp);
     print(jsonresponse['msg']);
-    print("______________________________________________");
     return jsonresponse['msg'];
   } else {
-    return "Registration Not Sucessful";
+    return "Registration Compeleted";
   }
 }
 
