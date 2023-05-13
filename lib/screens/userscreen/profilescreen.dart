@@ -5,6 +5,7 @@ import 'package:eward_frontend/screens/authentication/loginscreen.dart';
 import 'package:eward_frontend/screens/userscreen/familyview.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:eward_frontend/screens/userscreen/complaintStatu.dart';
+import 'package:eward_frontend/screens/userscreen/profilepage.dart';
 
 
 
@@ -84,7 +85,12 @@ class _profile_screenState extends State<profile_screen> {
                       color: Color.fromRGBO(143, 148, 251, 2),
                     ),
                     child: ElevatedButton(
-                      onPressed: (() {}),
+                      onPressed: (() {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return   profile_page();
+                        }));
+                      }),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.transparent),

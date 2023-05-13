@@ -5,7 +5,7 @@ import 'package:eward_frontend/screens/authentication/loginscreen.dart';
 import 'package:eward_frontend/screens/memberscreen/requests.dart';
 import 'package:eward_frontend/screens/memberscreen/datashow.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:eward_frontend/screens/memberscreen/profilepage.dart';
 
 class profile_screen extends StatefulWidget {
   profile_screen({super.key});
@@ -53,16 +53,18 @@ class _profile_screenState extends State<profile_screen> {
             padding: const EdgeInsets.fromLTRB(220, 200, 20, 0),
             child: Container(
               child: Column(
-                children: [Text("Loggined as : ",
-                style: TextStyle(
-                    color: const Color.fromRGBO(143, 148, 251, 2),
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700)),
-                    Text('  $email1',
-                style: TextStyle(
-                    color: const Color.fromRGBO(143, 148, 251, 2),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500))],
+                children: [
+                  Text("Loggined as : ",
+                      style: TextStyle(
+                          color: const Color.fromRGBO(143, 148, 251, 2),
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700)),
+                  Text('  $email1',
+                      style: TextStyle(
+                          color: const Color.fromRGBO(143, 148, 251, 2),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500))
+                ],
               ),
             )),
         Padding(
@@ -90,7 +92,12 @@ class _profile_screenState extends State<profile_screen> {
                       color: const Color.fromRGBO(143, 148, 251, 2),
                     ),
                     child: ElevatedButton(
-                      onPressed: (() {}),
+                      onPressed: (() {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return   profile_page();
+                        }));
+                      }),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.transparent),

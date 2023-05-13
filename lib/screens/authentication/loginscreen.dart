@@ -6,6 +6,7 @@ import 'package:eward_frontend/apicall/apirequest.dart';
 import 'package:eward_frontend/screens/authentication/signupscreen.dart';
 import 'package:eward_frontend/screens/adminscreens/adminhomepage.dart';
 import 'package:eward_frontend/screens/adminscreens/adminnav.dart';
+import 'package:eward_frontend/screens/authentication/chanagepassword.dart';
 
 class loginscreen extends StatelessWidget {
   loginscreen({super.key});
@@ -139,28 +140,50 @@ class loginscreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Row(
+                Column(
                   children: [
-                    const Text(
-                      'Does not have account?',
-                      style:
-                          TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                    Row(
+                      children: [
+                        const Text(
+                          'Does not have account?',
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255)),
+                        ),
+                        TextButton(
+                          child: const Text(
+                            'Sign Up',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: ((context) {
+                              return userRegistration();
+                            })));
+                            //signup screen
+                          },
+                        ),
+                        const Text(
+                          ' ',
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255)),
+                        ),
+                      ],
+                      mainAxisAlignment: MainAxisAlignment.center,
                     ),
                     TextButton(
                       child: const Text(
-                        'Sign Up',
+                        'Forgot password?',
                         style: TextStyle(fontSize: 20),
                       ),
                       onPressed: () {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: ((context) {
-                          return userRegistration();
+                          return Changepassword();
                         })));
                         //signup screen
                       },
                     )
                   ],
-                  mainAxisAlignment: MainAxisAlignment.center,
                 ),
               ],
             ),

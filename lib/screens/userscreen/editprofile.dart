@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:eward_frontend/apicall/apirequest.dart';
-import 'package:eward_frontend/screens/authentication/loginscreen.dart';
 
-class userRegistration extends StatefulWidget {
-  const userRegistration({super.key});
+class EditProfile extends StatefulWidget {
+  EditProfile({super.key});
 
   @override
-  MyCustomFormState createState() {
-    return MyCustomFormState();
-  }
+  State<EditProfile> createState() => _memberRegState();
 }
 
-class MyCustomFormState extends State<userRegistration> {
+class _memberRegState extends State<EditProfile> {
   final _formKey = GlobalKey<FormState>();
   final t1 = TextEditingController();
   final t2 = TextEditingController();
@@ -26,7 +23,15 @@ class MyCustomFormState extends State<userRegistration> {
 
   String? selectedoption;
   String? select_tax;
-  var jobs = ['Goverment ', 'Doctor', 'Nurse', 'Military', 'Police', 'Others'];
+  var jobs = [
+    'Goverment ',
+    'Doctor',
+    'Nurse',
+    'Military',
+    'Police',
+    'Others',
+    'Private'
+  ];
   var blood_group = ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-'];
   var qualification = [
     'School',
@@ -39,39 +44,55 @@ class MyCustomFormState extends State<userRegistration> {
   String? selectedjob;
   String? selectedqualification;
   String? selectedbloodgroup;
+
+  @override
+  void initState() {
+    convertToMap();
+  }
+
+  String convert(str) {
+    String firtle = str[0].toUpperCase();
+    String sub = str.substring(1);
+    print(firtle + sub);
+    return firtle + sub;
+  }
+
+  void convertToMap() async {
+    dynamic dynamicObject = await getUserData();
+    Map<String, dynamic> mapObject = {};
+    if (dynamicObject is Map) {
+      mapObject = Map<String, dynamic>.from(dynamicObject);
+    }
+    print(mapObject);
+    t2.text = mapObject['firstname'];
+    t3.text = mapObject['lastname'];
+    t4.text = mapObject['voter_id'];
+    t5.text = mapObject['age'].toString();
+    t6.text = mapObject['phone'];
+    t8.text = mapObject['housenumber'];
+    setState(() {
+      selectedoption = mapObject['gender'];
+      String bldgrp = mapObject['blood_group'];
+      selectedbloodgroup = bldgrp.replaceAll('ve', '');
+      selectedqualification = convert(mapObject['qualification']);
+      selectedjob = convert(mapObject['job']);
+      select_tax = mapObject['tax_payer'];
+    });
+
+    //selectedbloodgroup = mapObject['blood_group'];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("User Registeration")),
       body: SafeArea(
-        child: SingleChildScrollView( 
+        child: SingleChildScrollView(
           child: Material(
             child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Enter a vaild email';
-                        }
-                        if (!isValidEmail(value)) {
-                          return 'Enter a valid email';
-                        }
-                        return null;
-                      },
-                      controller: t1,
-                      decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.email),
-                        border: OutlineInputBorder(),
-                        labelText: 'Enter Email',
-                      ),
-                    ),
-                  ),
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -167,9 +188,6 @@ class MyCustomFormState extends State<userRegistration> {
                         if (value == null || value.isEmpty) {
                           return 'Age Required';
                         }
-                         if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
-                          return 'Only numbers allowed';
-                        }
                         return null;
                       },
                       controller: t5,
@@ -250,9 +268,6 @@ class MyCustomFormState extends State<userRegistration> {
                         if (value == null || value.isEmpty) {
                           return 'Phone Number required';
                         }
-                         if (!isValidPhoneNumber(value)) {
-                          return 'Enter vaild phone number';
-                        }
                         return null;
                       },
                       controller: t6,
@@ -260,27 +275,6 @@ class MyCustomFormState extends State<userRegistration> {
                         prefixIcon: Icon(Icons.phone),
                         border: OutlineInputBorder(),
                         labelText: 'Enter Phone Number',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Ward number required';
-                        }
-                         if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
-                          return 'Only numbers allowed';
-                        }
-                        return null;
-                      },
-                      controller: t7,
-                      decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.numbers_outlined),
-                        border: OutlineInputBorder(),
-                        labelText: 'Enter Ward',
                       ),
                     ),
                   ),
@@ -381,43 +375,53 @@ class MyCustomFormState extends State<userRegistration> {
                         ],
                       )),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Password required';
-                        }
-                        return null;
-                      },
-                      obscureText: true,
-                      controller: t9,
-                      decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.password),
-                        border: OutlineInputBorder(),
-                        labelText: 'Enter Password',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Required';
-                        }
-                        return null;
-                      },
-                      obscureText: true,
-                      controller: t10,
-                      decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.password),
-                        border: OutlineInputBorder(),
-                        labelText: 'ReEnter Password',
-                      ),
-                    ),
-                  ),
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: Container(
+                        height: 50,
+                        width: 430,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: const LinearGradient(colors: [
+                              Color.fromRGBO(143, 148, 251, 1),
+                              Color.fromRGBO(143, 148, 251, 2)
+                            ])),
+                        child: ElevatedButton(
+                          onPressed: (() async {
+                            String response;
+                            if (_formKey.currentState!.validate()) {
+                              var usermap = Map();
+                              usermap['firstname'] = t2.text;
+                              usermap['lastname'] = t3.text;
+                              usermap['voter_id'] = t4.text;
+                              usermap['age'] = t5.text;
+                              usermap['phone'] = t6.text;
+                              usermap['housenumber'] = t8.text;
+                              usermap['blood_group'] = selectedbloodgroup;
+                              usermap['qualification'] = selectedqualification;
+                              usermap['tax_payer'] = select_tax;
+                              usermap['job'] = selectedjob;
+                              usermap['gender'] = selectedoption;
+
+                               response = await userUpdate(usermap);
+                              Navigator.of(context).pop();
+                            } else {
+                              response = "Invaild Data";
+                            }
+
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              content: Text(response),
+                            ));
+                          }),
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                            shadowColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                          ),
+                          child: const Text('Update Profile '),
+                        ),
+                      )),
                   Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Container(
@@ -426,47 +430,12 @@ class MyCustomFormState extends State<userRegistration> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             gradient: const LinearGradient(colors: [
-                              Color.fromARGB(255, 0, 98, 255),
-                              Color.fromARGB(255, 0, 98, 255),
+                              Color.fromRGBO(143, 148, 251, 1),
+                              Color.fromRGBO(143, 148, 251, 2)
                             ])),
                         child: ElevatedButton(
                           onPressed: (() async {
-                            var usermap = Map();
-                            usermap['email'] = t1.text;
-                            usermap['firstname'] = t2.text;
-                            usermap['lastname'] = t3.text;
-                            usermap['voter_id'] = t4.text;
-                            usermap['job'] = selectedjob;
-                            usermap['tax_payer'] = select_tax;
-                            usermap['age'] = t5.text;
-                            usermap['gender'] = selectedoption;
-                            usermap['phone'] = t6.text;
-                            usermap['blood_group'] = selectedbloodgroup;
-                            usermap['ward'] = t7.text;
-                            usermap['housenumber'] = t8.text;
-                            usermap['password'] = t9.text;
-                            usermap['qualification'] = selectedqualification;
-                            String password1, password2, response;
-                            password1 = t9.text;
-                            password2 = t10.text;
-
-                            if (_formKey.currentState!.validate()) {
-                              if (password1 == password2) {
-                                response = await userRegistrations(usermap);
-                                Navigator.pushReplacement(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return loginscreen();
-                                }));
-                              } else {
-                                response = "Password  Mismatch";
-                              }
-                            } else {
-                              response = "Invaild data";
-                            }
-
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                behavior: SnackBarBehavior.floating,
-                                content: Text(response)));
+                            Navigator.of(context).pop();
                           }),
                           style: ButtonStyle(
                             backgroundColor:
@@ -474,27 +443,9 @@ class MyCustomFormState extends State<userRegistration> {
                             shadowColor:
                                 MaterialStateProperty.all(Colors.transparent),
                           ),
-                          child: const Text('Register'),
+                          child: const Text('Cancel '),
                         ),
                       )),
-                  Row(
-                    children: [
-                      const Text('Does not have account?'),
-                      TextButton(
-                        child: const Text(
-                          'Sign in',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: ((context) {
-                            return loginscreen();
-                          })));
-                        },
-                      )
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.center,
-                  ),
                 ],
               ),
             ),
@@ -502,14 +453,5 @@ class MyCustomFormState extends State<userRegistration> {
         ),
       ),
     );
-  }
-   bool isValidEmail(String email) {
-    return RegExp(
-            r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$')
-        .hasMatch(email);
-  }
-  bool isValidPhoneNumber(String phoneNumber) {
-    String digits = phoneNumber.replaceAll(RegExp(r'[^0-9]'), '');
-    return digits.length == 10;
   }
 }

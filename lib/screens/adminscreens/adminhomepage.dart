@@ -8,7 +8,7 @@ class adminHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(appBar: AppBar(title:Text("Admin Home")),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.of(context)

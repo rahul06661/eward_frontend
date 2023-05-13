@@ -116,6 +116,7 @@ class _complaintscreenState extends State<complaintscreen> {
                           onPressed: (() {
                            
                             updatecomplaint(context);
+                            t1.clear();
                           }),
                           style: ButtonStyle(
                             backgroundColor:

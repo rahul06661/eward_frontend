@@ -109,7 +109,7 @@ class _complaintscreenState extends State<complaintscreen> {
                 int.parse(status) != 3
                     ? Container(
                         height: 50,
-                        width: 100,
+                        width: 200,
                         child: ElevatedButton(
                             onPressed: (() {
                               
@@ -118,7 +118,7 @@ class _complaintscreenState extends State<complaintscreen> {
                             }),
                             style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all(Colors.transparent),
+                                  MaterialStateProperty.all(Color.fromARGB(211, 13, 36, 240)),
                               shadowColor:
                                   MaterialStateProperty.all(Colors.transparent),
                             ),

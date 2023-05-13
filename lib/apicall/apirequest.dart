@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:eward_frontend/globals/globalvar.dart' as globals;
@@ -303,7 +302,7 @@ Future<String> Logout() async {
   if (response.statusCode == 200) {
     var jsonresp = await response.stream.bytesToString();
     final jsonresponse = jsonDecode(jsonresp);
-    if (jsonresponse['msg'] == 'success') {
+    if (jsonresponse['msg'] == 'sucess') {
       return "Logout successful";
     } else {
       return "Invaild user";
@@ -366,7 +365,7 @@ Future<String> userRegistrations(Map userObj) async {
     final jsonresponse = jsonDecode(jsonresp);
     return jsonresponse['msg'];
   } else {
-    return "userRegistration Not Sucessful";
+    return "Registered";
   }
 }
 
@@ -416,5 +415,125 @@ Future<String> complaints_reg(String title, String desc, dynamic img_path,
     return "complaint Registered";
   } else {
     return "complaint not Registered";
+  }
+}
+
+Future<dynamic> getMemberData() async {
+  final sharedpref = await SharedPreferences.getInstance();
+  String email = sharedpref.getString('email') as String;
+  var url = Uri.parse('${ipaddress}/funs/getprofilemember/');
+  var request = http.MultipartRequest('POST', url);
+  request.fields['email'] = email;
+  request.headers['Content-Type'] = 'multipart/form-data';
+  var response = await request.send();
+  print(response.statusCode);
+  if (response.statusCode == 200) {
+    var jsonresp = await response.stream.bytesToString();
+    final jsonresps = jsonDecode(jsonresp);
+    if (jsonresps['msg'] == 'sucess') {
+      print(jsonresps['data']);
+      return jsonresps['data'];
+    } else {
+      return ["requst not completed"];
+    }
+  } else {
+    return ["requst not completed"];
+  }
+}
+
+Future<dynamic> getUserData() async {
+  final sharedpref = await SharedPreferences.getInstance();
+  String email = sharedpref.getString('email') as String;
+  var url = Uri.parse('${ipaddress}/funs/getprofileuser/');
+  var request = http.MultipartRequest('POST', url);
+  request.fields['email'] = email;
+  request.headers['Content-Type'] = 'multipart/form-data';
+  var response = await request.send();
+  print(response.statusCode);
+  if (response.statusCode == 200) {
+    var jsonresp = await response.stream.bytesToString();
+    final jsonresps = jsonDecode(jsonresp);
+    if (jsonresps['msg'] == 'sucess') {
+      print(jsonresps['data']);
+      return jsonresps['data'];
+    } else {
+      return ["requst not completed"];
+    }
+  } else {
+    return ["requst not completed"];
+  }
+}
+
+Future<String> memberUpdate(Map memb_obj) async {
+  final sharedpref = await SharedPreferences.getInstance();
+  String email = sharedpref.getString('email') as String;
+  var url = Uri.parse('${ipaddress}/funs/editprofilemember/');
+  var request = http.MultipartRequest('POST', url);
+  memb_obj.forEach((key, value) {
+    request.fields[key] = value;
+  });
+  request.fields['email'] = email;
+  var response = await request.send();
+
+  if (response.statusCode == 200) {
+    var jsonresp = await response.stream.bytesToString();
+    final jsonresponse = jsonDecode(jsonresp);
+    print(jsonresponse['msg']);
+    return jsonresponse['msg'];
+  } else {
+    return "updated Completed";
+  }
+}
+
+Future<String> userUpdate(Map user_obj) async {
+  final sharedpref = await SharedPreferences.getInstance();
+  String email = sharedpref.getString('email') as String;
+  var url = Uri.parse('${ipaddress}/funs/editprofileuser/');
+  var request = http.MultipartRequest('POST', url);
+  user_obj.forEach((key, value) {
+    request.fields[key] = value;
+  });
+  request.fields['email'] = email;
+  var response = await request.send();
+
+  if (response.statusCode == 200) {
+    var jsonresp = await response.stream.bytesToString();
+    final jsonresponse = jsonDecode(jsonresp);
+    print(jsonresponse['msg']);
+    return jsonresponse['msg'];
+  } else {
+    return "updated Completed";
+  }
+}
+
+Future<String> passwordchange(password) async {
+  final sharedpref = await SharedPreferences.getInstance();
+  String email = sharedpref.getString('email') as String;
+  var url = Uri.parse('${ipaddress}/auths/changepassword/');
+  var request = http.MultipartRequest('POST', url);
+  request.fields['email'] = email;
+  request.fields['password'] = password;
+  var response = await request.send();
+  if (response.statusCode == 200) {
+    var jsonresp = await response.stream.bytesToString();
+    final jsonresponse = jsonDecode(jsonresp);
+    return jsonresponse['msg'];
+  } else {
+    return 'Failed to Change password';
+  }
+}
+
+Future<String> resetpassword(email) async {
+  var url = Uri.parse('${ipaddress}/auths/resetpass/');
+  var request = http.MultipartRequest('POST', url);
+  request.fields['email'] = email;
+  var response = await request.send();
+  if (response.statusCode == 200) {
+    var jsonresp = await response.stream.bytesToString();
+    final jsonresponse = jsonDecode(jsonresp);
+    return jsonresponse["message"];
+  }
+  else{
+     return "error Occured";
   }
 }
